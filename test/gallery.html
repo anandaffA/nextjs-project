@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .fade-in {
+            opacity: 0;
+            transform: translateY(100px);
+            transition: opacity 10s ease-out, transform 10s ease-out;
+        }
+        .fade-in.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Hide scrollbar */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="mx-auto">
+
+        <h1 class="text-3xl font-bold text-center mb-6">Test</h1>
+
+        <div class="w-full h-[120vh] overflow-x-auto overflow-y-hidden scrollbar-hide">
+        <div id="gallery" class="flex flex-nowrap space-x-6 p-2 snap-x snap-mandatory">
+            <div class="flex flex-col justify-center flex-none space-y-4 snap-center">
+                <img src="https://picsum.photos/200/301" class="w-50 max-h-50 snap-center fade-in w-full rounded-lg shadow-lg hover:scale-105 transition transform duration-300 cursor-pointer" onclick="openModal(this.src)">
+                <img src="https://picsum.photos/200/252" class="w-50 max-h-50 snap-center fade-in w-full rounded-lg shadow-lg hover:scale-105 transition transform duration-300 cursor-pointer" onclick="openModal(this.src)">
+            </div>
+            <div class="flex flex-col justify-center flex-none space-y-4 snap-center">
+                <img src="https://picsum.photos/200/353" class="w-50 max-h-50 snap-center fade-in w-full rounded-lg shadow-lg hover:scale-105 transition transform duration-300 cursor-pointer" onclick="openModal(this.src)">
+                <img src="https://picsum.photos/200/374" class="w-50 max-h-50 snap-center fade-in w-full rounded-lg shadow-lg hover:scale-105 transition transform duration-300 cursor-pointer" onclick="openModal(this.src)">
+            </div>
+            <div class="flex flex-col justify-center flex-none space-y-4 snap-center">
+                <img src="https://picsum.photos/200/255" class="w-50 max-h-50 snap-center fade-in w-full rounded-lg shadow-lg hover:scale-105 transition transform duration-300 cursor-pointer" onclick="openModal(this.src)">
+                <img src="https://picsum.photos/200/355" class="w-50 max-h-50 snap-center fade-in w-full rounded-lg shadow-lg hover:scale-105 transition transform duration-300 cursor-pointer" onclick="openModal(this.src)">
+            </div>
+            <div class="flex flex-col justify-center flex-none space-y-4 snap-center">
+                <img src="https://picsum.photos/200/426" class="w-50 max-h-50 snap-center fade-in w-full rounded-lg shadow-lg hover:scale-105 transition transform duration-300 cursor-pointer" onclick="openModal(this.src)">
+                <img src="https://picsum.photos/200/307" class="w-50 max-h-50 snap-center fade-in w-full rounded-lg shadow-lg hover:scale-105 transition transform duration-300 cursor-pointer" onclick="openModal(this.src)">
+            </div>
+            <div class="flex flex-col justify-center flex-none space-y-4 snap-center">
+                <img src="https://picsum.photos/200/258" class="w-50 max-h-50 snap-center fade-in w-full rounded-lg shadow-lg hover:scale-105 transition transform duration-300 cursor-pointer" onclick="openModal(this.src)">
+                <img src="https://picsum.photos/200/359" class="w-50 max-h-50 snap-center fade-in w-full rounded-lg shadow-lg hover:scale-105 transition transform duration-300 cursor-pointer" onclick="openModal(this.src)">
+            </div>
+            <div class="flex flex-col justify-center flex-none space-y-4 snap-center">
+                <img src="https://picsum.photos/200/308" class="w-50 max-h-50 snap-center fade-in w-full rounded-lg shadow-lg hover:scale-105 transition transform duration-300 cursor-pointer" onclick="openModal(this.src)">
+                <img src="https://picsum.photos/200/252" class="w-50 max-h-50 snap-center fade-in w-full rounded-lg shadow-lg hover:scale-105 transition transform duration-300 cursor-pointer" onclick="openModal(this.src)">
+            </div>
+            <div class="flex flex-col justify-center flex-none space-y-4 snap-center">
+                <img src="https://picsum.photos/200/313" class="w-50 max-h-50 snap-center fade-in w-full rounded-lg shadow-lg hover:scale-105 transition transform duration-300 cursor-pointer" onclick="openModal(this.src)">
+                <img src="https://picsum.photos/200/324" class="w-50 max-h-50 snap-center fade-in w-full rounded-lg shadow-lg hover:scale-105 transition transform duration-300 cursor-pointer" onclick="openModal(this.src)">
+            </div>
+            <div class="flex flex-col justify-center flex-none space-y-4 snap-center">
+                <img src="https://picsum.photos/200/235" class="w-50 max-h-50 snap-center fade-in w-full rounded-lg shadow-lg hover:scale-105 transition transform duration-300 cursor-pointer" onclick="openModal(this.src)">
+                <img src="https://picsum.photos/200/345" class="w-50 max-h-50 snap-center fade-in w-full rounded-lg shadow-lg hover:scale-105 transition transform duration-300 cursor-pointer" onclick="openModal(this.src)">
+            </div>
+            <div class="flex flex-col justify-center flex-none space-y-4 snap-center">
+                <img src="https://picsum.photos/200/456" class="w-50 max-h-50 snap-center fade-in w-full rounded-lg shadow-lg hover:scale-105 transition transform duration-300 cursor-pointer" onclick="openModal(this.src)">
+                <img src="https://picsum.photos/200/367" class="w-50 max-h-50 snap-center fade-in w-full rounded-lg shadow-lg hover:scale-105 transition transform duration-300 cursor-pointer" onclick="openModal(this.src)">
+            </div>
+            <div class="flex flex-col justify-center flex-none space-y-4 snap-center">
+                <img src="https://picsum.photos/200/278" class="w-50 max-h-50 snap-center fade-in w-full rounded-lg shadow-lg hover:scale-105 transition transform duration-300 cursor-pointer" onclick="openModal(this.src)">
+                <img src="https://picsum.photos/200/389" class="w-50 max-h-50 snap-center fade-in w-full rounded-lg shadow-lg hover:scale-105 transition transform duration-300 cursor-pointer" onclick="openModal(this.src)">
+            </div>
+        </div>
+        </div>
+
+    <!-- Modal -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center hidden" onclick="closeModal()">
+        <img id="modal-img" class="max-w-full max-h-full rounded-lg">
+    </div>
+
+    <script>
+        function openModal(src) {
+            document.getElementById('modal').classList.remove('hidden');
+            document.getElementById('modal-img').src = src;
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const images = document.querySelectorAll(".fade-in");
+            images.forEach(img => {
+                img.onload = () => img.classList.add("loaded");
+            });
+        });
+        document.getElementById('gallery').scrollBy({ left: direction * 300, behavior: 'smooth' });
+
+    </script>
+</body>
+</html>
