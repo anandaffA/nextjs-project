@@ -31,8 +31,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={eb_garamond.className}
-        // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        // className={eb_garamond.className}
+        className={`${geistSans.variable} ${geistMono.variable} ${eb_garamond.variable} antialiased`}
       >
         {children}
       </body>

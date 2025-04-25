@@ -8,24 +8,36 @@ export default function LoginTemplate(){
     const [input_state, state_function] = useState(false)
 
     return (
-
-        <div onClick={() => state_function(!input_state)} className="absolute inset-0 z-10 text-center mx-auto flex flex-col justify-center items-center">
+        <div className="absolute inset-0 z-10 text-center mx-auto flex flex-col justify-center items-center font-garamond">
+            <AnimatePresence initial={true}>
+            {
+                input_state ? (
+                    <motion.div
+                    initial={{ opacity: 0}}
+                    animate={{ opacity: 1}}
+                    exit={{ opacity: 0   }}
+                    transition={{
+                        duration: 0.5,
+                        bounce: 0.3,
+                        ease: "easeInOut"
+                    }}
+                    className="fixed inset-0 bg-black/33 z-0"></motion.div>
+                ) : null
+            }
+            </AnimatePresence>
             <motion.div
-            layout
-            initial={{y: -15 }}
-            animate={{y: 0 }}
-            exit   ={{y: -15 }}
+            onClick={() => state_function(!input_state)}
+            animate={{y: input_state ? -125 : 0 }}
             //animate={{ y: input_state? -20 : 0 }}
             transition={{
                 type: "spring",
                 visualDuration: 0.5,
-                bounce: 0.3,
+                bounce: 0.15,
                 ease: "easeInOut",
-                delay: !input_state? 0.5 : 0
                 }}
-                className="flex flex-row">
-                <h1 className="font-bold text-8xl text-white">GHST</h1>
-                <span className="animate-typography font-bold text-8xl text-white">_</span>
+                className="absolute flex flex-row">
+                <h1 className="font-bold text-9xl text-white">GHST</h1>
+                <span className="animate-typography font-bold text-9xl -mt-4 text-white">_</span>
             </motion.div>
         <AnimatePresence initial={true}>
           { 
@@ -40,7 +52,7 @@ export default function LoginTemplate(){
                     bounce: 0.3,
                     ease: "easeInOut"
                 }}
-                type="text" className="border-2 rounded-4xl text-white text-6xl m-2 p-3"/>
+                type="password" className="border-2 z-0 rounded-4xl text-white text-center text-6xl m-2 p-3"/>
             ) : null
         }
         </AnimatePresence>

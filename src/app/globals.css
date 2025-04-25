@@ -10,6 +10,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-garamond: var(--font-eb-garamond);
 
   --animate-typography: blink 1s step-start infinite;
   @keyframes blink {

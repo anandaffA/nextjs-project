@@ -1,9 +1,12 @@
+'use client'
 import Image from "next/image";
+import { useState } from "react";
 import LoginTemplate from "./components/login";
 
 export default function Home() {
+  const [page_state, pageState] = useState('login')
   return (
-    <div className="relative min-h-screen min-w-screen">
+    <div className="relative min-h-screen w-screen flex flex-col-reverse">
       <main>
         <Image
         src="/img/home.png"
@@ -12,10 +15,12 @@ export default function Home() {
         objectFit="cover"
         priority
         />
+        <div className="flex-1 flex">
         <LoginTemplate/>
+        </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        
+      <footer className=" text-white text-center py-3 z-10">
+        <h3 className="font-mono text-sm">2025 GH*ST  -  ALL RIGHTS RESERVED.</h3>
       </footer>
     </div>
   );
