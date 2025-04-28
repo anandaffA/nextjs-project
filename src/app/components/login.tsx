@@ -41,8 +41,8 @@ export default function LoginTemplate({onLogin}){
                 ease: "easeInOut",
                 }}
                 className="absolute flex flex-row">
-                <h1 className="font-bold text-9xl text-white">GHST</h1>
-                <span className="animate-typography font-bold text-9xl -mt-4 text-white">_</span>
+                <h1 className="font-bold text-6xl lg:text-9xl md:text-6xl text-white">GHST</h1>
+                <span className="animate-typography font-bold text-6xl lg:text-9xl md:text-6xl -mt-4 text-white">_</span>
             </motion.div>
         <AnimatePresence initial={true}>
           { 
@@ -58,7 +58,7 @@ export default function LoginTemplate({onLogin}){
                     bounce: 0.3,
                     ease: "easeInOut"
                 }}
-                type="password" className="border-2 z-0 rounded-4xl text-white text-center text-6xl m-2 p-3"
+                type="password" className="border-2 z-0 rounded-4xl text-white text-center text-3xl lg:text-6xl m-2 p-3"
                 value={input_value}
                 onChange={(e) => setInput(e.target.value)}
                 />
