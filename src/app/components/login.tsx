@@ -1,12 +1,17 @@
 'use client'
 import { useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
-import { input } from "motion/react-client"
+import { form, input } from "motion/react-client"
 
-export default function LoginTemplate(){
+export default function LoginTemplate({onLogin}){
     
-    const [input_state, state_function] = useState(false)
-
+    const [input_state, state_function] = useState(false);
+    const [input_value, setInput] = useState('')
+    const submit_ = (e) => {
+        console.log(input_value)
+        e.preventDefault()
+        onLogin(input_value)
+    }
     return (
         <div className="absolute inset-0 z-10 text-center mx-auto flex flex-col justify-center items-center font-garamond">
             <AnimatePresence initial={true}>
@@ -42,6 +47,7 @@ export default function LoginTemplate(){
         <AnimatePresence initial={true}>
           { 
             input_state ? (
+                <form onSubmit={submit_} className="z-10">
                 <motion.input
                 initial={{ opacity: 0, y: -15 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -52,7 +58,11 @@ export default function LoginTemplate(){
                     bounce: 0.3,
                     ease: "easeInOut"
                 }}
-                type="password" className="border-2 z-0 rounded-4xl text-white text-center text-6xl m-2 p-3"/>
+                type="password" className="border-2 z-0 rounded-4xl text-white text-center text-6xl m-2 p-3"
+                value={input_value}
+                onChange={(e) => setInput(e.target.value)}
+                />
+                </form>
             ) : null
         }
         </AnimatePresence>
