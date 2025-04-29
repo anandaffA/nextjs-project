@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import { form, input } from "motion/react-client"
 
@@ -8,10 +8,24 @@ export default function LoginTemplate({onLogin}){
     const [input_state, state_function] = useState(false);
     const [input_value, setInput] = useState('')
     const submit_ = (e) => {
-        console.log(input_value)
+        console.log("SUBMIT FROM LOGIN: ",input_value)
         e.preventDefault()
         onLogin(input_value)
     }
+    //check screen size...
+    const [isSmallScreen, setIsSmallScreen] = useState(false)
+
+    useEffect(() => {
+        const checkScreenSize = () => {
+        setIsSmallScreen(window.innerWidth < 768) // small screen
+        }
+        checkScreenSize() // run once
+        window.addEventListener('resize', checkScreenSize) // run on resize
+        return () => window.removeEventListener('resize', checkScreenSize)
+    }, [])
+
+    const offset = isSmallScreen ? -80 : -125
+  //
     return (
         <div className="absolute inset-0 z-10 text-center mx-auto flex flex-col justify-center items-center font-garamond">
             <AnimatePresence initial={true}>
@@ -32,7 +46,7 @@ export default function LoginTemplate({onLogin}){
             </AnimatePresence>
             <motion.div
             onClick={() => state_function(!input_state)}
-            animate={{y: input_state ? -125 : 0 }}
+            animate={{ y: input_state ? (isSmallScreen ? -80 : -125) : 0 }}
             //animate={{ y: input_state? -20 : 0 }}
             transition={{
                 type: "spring",
@@ -58,7 +72,7 @@ export default function LoginTemplate({onLogin}){
                     bounce: 0.3,
                     ease: "easeInOut"
                 }}
-                type="password" className="border-2 z-0 rounded-4xl text-white text-center text-3xl lg:text-6xl m-2 p-3"
+                type="password" className="border-2 z-0 rounded-4xl text-white text-center text-2xl lg:text-6xl m-2 p-3"
                 value={input_value}
                 onChange={(e) => setInput(e.target.value)}
                 />
