@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     domains: ['picsum.photos'],
   },
 };
+
 // next.config.js
 
 module.exports = nextConfig;

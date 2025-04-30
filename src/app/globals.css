@@ -3,11 +3,17 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* for.est */
+  --color-bg: #0D1B1E; /* Deep pine green */
+  --color-mist: #C8D5CD; /* Pale sage */
+  --color-moss: #5A7C5F; /* Forest floor green */
+  --color-bark: #3B2F2F; /* Deep bark brown */
+  --color-fog: #8E9E91; /* Desaturated cool grey */
+  --color-highlight: #76977C; /* Muted olive highlight */
+  --color-tint: #A9B9AC; /* Misty cool neutral */
 }
 .no-scrollbar {
-  /* For Firefox */
   scrollbar-width: none;
-  /* For Chrome, Safari and Edge */
   -ms-overflow-style: none;
 }
 .no-scrollbar::-webkit-scrollbar {
@@ -20,6 +26,13 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-garamond: var(--font-eb-garamond);
+  
+  --color-forest-moss : var(--color-moss);
+  --color-forest-mist : var(--color-mist);
+  --color-forest-bg : var(--color-bg);
+  --color-forest-fog : var(--color-fog);
+  --color-forest-tint : var(--color-tint);
+  --color-forest-highlight : var(--color-highlight);
 
   --animate-typography: blink 1s step-start infinite;
   @keyframes blink {

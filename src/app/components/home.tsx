@@ -24,11 +24,11 @@ export default function ProfileIrlPage({pageReturn}){
 
     return ( 
         <>
-        <div className="relative z-10 flex items-center justify-center h-full w-full">
-            <div className="flex flex-col md:flex-row justify-center items-center mx-auto gap-4 h-full w-full">
+        <div className="relative z-10 items-center  justify-center">
+            <div className="flex flex-col md:flex-row gap-4">
                 <motion.div 
                 onClick={handleClick}
-                className="relative w-50 h-40 md:w-96 md:h-96 basis-1/3">
+                className="relative w-96 h-80 md:w-96 md:h-96 basis-1/3">
                     <Image
                     src={'/img/knight_placeholder.jpg'}
                     alt="placeholder"
@@ -38,7 +38,7 @@ export default function ProfileIrlPage({pageReturn}){
                 </motion.div>
                 
                 {/* <h1 className="text-white text-8xl">TESTINGG</h1> */}
-                <div className="grid grid-cols-2 gap-3 text-lg basis-2/3 font-mono">
+                <div className="grid grid-cols-2 gap-3 px-3 md:px-0 text-lg basis-2/3 font-mono">
                     <div className="p-5 border-1 ring-white text-white">Name: </div>
                     <div className="p-5 text-white border-1 ring-white">Anandaffa Apriadi</div>
                     <div className="p-5 border-1 ring-white text-white">Email: </div>
@@ -55,10 +55,15 @@ export default function ProfileIrlPage({pageReturn}){
                 </div>
             </div>   
         </div>
+        <button 
+        onClick={return_} 
+        className="text-white text-center hover:bg-white hover:text-black transition-colors duration-300 font-mono flex justify-end items-center gap-2 p-2">
+            <i className="fas fa-arrow-left text-center"></i> Return 
+        </button>
         <Modal isOpen={open_profile} onClose={()=>OpenProfile(false)} origin={origin}>
-            <div onClick={()=>OpenProfile(false)} className="flex flex-row gap-x-5 justify-items-start items-center">
+            <div onClick={()=>OpenProfile(false)} className="flex flex-col md:flex-row gap-x-5 justify-items-start items-center">
                 <div 
-                className="relative w-28 h-40 md:w-80 md:h-96 basis-1/3">
+                className="relative w-80 h-40 md:w-80 md:h-96 basis-1/3">
                     <Image
                     src={'/img/knight_placeholder.jpg'}
                     alt="placeholder"
@@ -67,21 +72,21 @@ export default function ProfileIrlPage({pageReturn}){
                     />
                 </div>        
                 <div className="basis-2/3">
-                <p className="text-white font-garamond py-5 text-xl text-left">Born in Jakarta, art and gaming enthusiast (fuck gacha games though), is an artist myself.
-                Started coding in college, did an internship for one year as a PHP developer then graduated.
-                Worked as a freelance illustrator after graduation and now currently has a working contract as a full-stack developer using Django w/ bootstrap and PostgreSQL
-                And now working in this profile section while learning React/Next.js on the go! Despised javascript but... <br/>Honestly it's been fun learning this and Tailwind
-                <br /><br />
-                I have NOT optimize this app for mobile, i will eventually..
+                <p className="text-white font-garamond py-5 text-xl text-left">
+Born in Jakarta, Big fan of art and games, unless we’re talking about gacha games, those can choke. I do art myself too.
+<br/><br />
+Started coding back in college when I decided sleep was optional. Did a one-year internship as a PHP developer (don’t judge me, we’ve all got skeletons), graduated, and then jumped straight into the chaotic freedom of freelance illustration—because what screams "financial security" more than drawing for random people?
+<br /><br />
+Currently locked into a working contract as a full-stack dev using Django, Bootstrap, and PostgreSQL. Basically juggling both ends of the stack like it owes me money.
+<br /><br />
+I used to hate JavaScript with the burning passion of a thousand devlogs, but now I'm learning React/Next.js on the fly and honestly is enjoying it. Tailwind’s also cool, which means I’ve officially crossed into “actually likes front-end” territory.
+<br /><br />
+This is NOT optimized for mobile yet. I'll get there eventually. Probably.
                 </p>
                 </div>
             </div>
         </Modal>
-        <button 
-        onClick={return_} 
-        className="text-white text-center hover:bg-white hover:text-black transition-colors duration-300 font-mono flex justify-end items-center gap-2 p-2">
-            <i className="fas fa-arrow-left text-center"></i> Return 
-        </button>
+
         </>
     );
 }
