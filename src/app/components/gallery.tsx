@@ -2,8 +2,6 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react"
 import Modal from "./modal";
-import { div } from "motion/react-client";
-import { Itim } from "next/font/google";
 
 export default function GalleryTest({returnPage}){
     const [data, setData] = useState([])

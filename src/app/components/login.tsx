@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "motion/react"
-import { form, input } from "motion/react-client"
+// import { form, input } from "motion/react-client"
 
 
   
@@ -26,8 +26,7 @@ export default function LoginTemplate({onLogin}){
         return () => window.removeEventListener('resize', checkScreenSize)
     }, [])
 
-    const offset = isSmallScreen ? -80 : -125
-  //
+    //const offset = isSmallScreen ? -80 : -125
     return (
         <div className="absolute inset-0 z-10 text-center mx-auto flex flex-col justify-center items-center font-garamond">
             <AnimatePresence initial={true}>

@@ -3,8 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { motion, AnimatePresence } from "motion/react"
-import Button from "./buttontemplate";
+import { motion} from "motion/react"
 import Modal from "./modal";
 
 // import { fas, fad, fass, fasds } from '@awesome.me/'
@@ -73,13 +72,13 @@ export default function ProfileIrlPage({pageReturn}){
                 </div>        
                 <div className="basis-2/3">
                 <p className="text-white font-garamond py-5 text-xl text-left">
-Born in Jakarta, Big fan of art and games, unless we’re talking about gacha games, those can choke. I do art myself too.
+Born in Jakarta, Big fan of art and games, unless we&quot;re talking about gacha games, those can choke. I do art myself too.
 <br/><br />
-Started coding back in college when I decided sleep was optional. Did a one-year internship as a PHP developer (don’t judge me, we’ve all got skeletons), graduated, and then jumped straight into the chaotic freedom of freelance illustration—because what screams "financial security" more than drawing for random people?
+Started coding back in college when I decided sleep was optional. Did a one-year internship as a PHP developer (don&quot;t judge me, we&quot;ve all got skeletons), graduated, and then jumped straight into the chaotic freedom of freelance illustration, because what screams financial security more than drawing for random people?
 <br /><br />
 Currently locked into a working contract as a full-stack dev using Django, Bootstrap, and PostgreSQL. Basically juggling both ends of the stack like it owes me money.
 <br /><br />
-I used to hate JavaScript with the burning passion of a thousand devlogs, but now I'm learning React/Next.js on the fly and honestly is enjoying it. Tailwind’s also cool, which means I’ve officially crossed into “actually likes front-end” territory.
+I used to hate JavaScript with the burning passion of a thousand devlogs, but now I'm learning React/Next.js on the fly and honestly is enjoying it. Tailwind&quot;s also cool, which means I&quot;ve officially crossed into “actually likes front-end” territory.
 <br /><br />
 This is NOT optimized for mobile yet. I'll get there eventually. Probably.
                 </p>
