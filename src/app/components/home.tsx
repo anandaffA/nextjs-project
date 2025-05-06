@@ -78,7 +78,7 @@ Started coding back in college when I decided sleep was optional. Did a one-year
 <br /><br />
 Currently locked into a working contract as a full-stack dev using Django, Bootstrap, and PostgreSQL. Basically juggling both ends of the stack like it owes me money.
 <br /><br />
-I used to hate JavaScript with the burning passion of a thousand devlogs, but now I&apos;m learning React/Next.js on the fly and honestly is enjoying it. Tailwind&quot;s also cool, which means I&quot;ve officially crossed into “actually likes front-end” territory.
+I used to hate JavaScript with the burning passion of a thousand devlogs, but now I&apos;m learning React/Next.js on the fly and honestly is enjoying it. Tailwind&quot;s also cool, which means I&quot;ve officially crossed into actually likes front-end territory.
 <br /><br />
 This is NOT optimized for mobile yet. I&apos;ll get there eventually. Probably.
                 </p>
