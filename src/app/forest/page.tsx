@@ -1,14 +1,12 @@
 'use client'
 import Image from "next/image";
-import Input from "./components/input";
 import LoginCard from "./components/loginCard";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react"
-import { button } from "motion/react-client";
 
 
 export default function Home() {
-  let [page_state, pageState] = useState('')
+  const [page_state, pageState] = useState('')
   let content
 
   switch (page_state) {

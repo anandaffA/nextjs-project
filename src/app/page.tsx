@@ -7,7 +7,7 @@ import ProfileIrlPage from "./components/home";
 import GalleryTest from "./components/gallery";
 
 export default function Home() {
-  let [page_state, pageState] = useState('login')
+  const [page_state, pageState] = useState('login')
   const bg_url = {
     'login' :'/img/home.png',
     'profile' :'/img/profile-irl.jpg',

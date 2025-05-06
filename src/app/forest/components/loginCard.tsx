@@ -15,7 +15,8 @@ export default function LoginCard(){
     if (error) {
       alert("Login failed: " + error.message);
     } else {
-      alert("Yay!!!")
+      alert("yay! check your console.log")
+      console.log(data)
     }
   }
 
