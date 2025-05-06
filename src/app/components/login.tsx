@@ -3,6 +3,8 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import { form, input } from "motion/react-client"
 
+
+  
 export default function LoginTemplate({onLogin}){
     
     const [input_state, state_function] = useState(false);
