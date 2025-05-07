@@ -4,8 +4,16 @@ import { motion, AnimatePresence } from "motion/react"
 import Modal from "./modal";
 
 export default function GalleryTest({returnPage}){
-    const [data, setData] = useState([])
-    const [page, setPage] = useState(1)
+    type ImageItem = {
+        id: string;
+        author: string;
+        width: number;
+        height: number;
+        url: string;
+        download_url: string;
+      };
+      
+    const [data, setData] = useState<ImageItem[]>([]);    const [page, setPage] = useState(1)
     const return_ = () => {
         returnPage('login')
     }
