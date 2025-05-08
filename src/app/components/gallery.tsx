@@ -12,7 +12,7 @@ export default function GalleryTest({returnPage}){
         url: string;
         download_url: string;
       };
-      
+    
     const [data, setData] = useState<ImageItem[]>([]);    const [page, setPage] = useState(1)
     const return_ = () => {
         returnPage('login')
@@ -32,7 +32,7 @@ export default function GalleryTest({returnPage}){
     },[page])
 
     const [open_modal, openModal] = useState(false)
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState<ImageItem | null>(null);
     const [origin, setOrigin] = useState({ x: 0, y: 0 })
 
     const handleClick = (event,itm) => {

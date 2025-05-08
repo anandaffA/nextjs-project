@@ -56,7 +56,7 @@ export default function LoginTemplate({onLogin}){
                 ease: "easeInOut",
                 }}
                 className="absolute flex flex-row">
-                <h1 className="font-bold text-6xl lg:text-9xl md:text-6xl text-white">GHST</h1>
+                <h1 className="font-bold text-7xl lg:text-9xl md:text-6xl text-white">GHST</h1>
                 <span className="animate-typography font-bold text-6xl lg:text-9xl md:text-6xl -mt-4 text-white">_</span>
             </motion.div>
         <AnimatePresence initial={true}>

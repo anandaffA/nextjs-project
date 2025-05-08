@@ -101,7 +101,6 @@ export default function Home() {
           <div className="absolute inset-0 z-10 text-center mx-auto flex flex-col justify-center items-center font-garamond">
             <AnimatePresence mode='wait'>
             {content}
-
             </AnimatePresence>
           </div>
       </main>
