@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react"
+import Button from "./button";
 import Modal from "./modal";
 
-export default function GalleryTest({returnPage}){
+ function GalleryTest({returnPage}){
     type ImageItem = {
         id: string;
         author: string;
@@ -13,7 +14,8 @@ export default function GalleryTest({returnPage}){
         download_url: string;
       };
     
-    const [data, setData] = useState<ImageItem[]>([]);    const [page, setPage] = useState(1)
+    const [data, setData] = useState<ImageItem[]>([]); 
+    const [page, setPage] = useState(1)
     const return_ = () => {
         returnPage('login')
     }
@@ -44,7 +46,6 @@ export default function GalleryTest({returnPage}){
 
     return(
         <>
-        {/* <h1 className="font-mono text-6xl text-white"> Gallery </h1> */}
         <nav className="flex align-center justify-center md:justify-between px-5">
             <div className="flex justify-center gap-9 pt-5 px-5">
                 <button 
@@ -52,24 +53,21 @@ export default function GalleryTest({returnPage}){
                 onClick={() => changePage(page-1)} 
                 className=
                 {page !== 1 ? (
-                    "text-white text-center hover:bg-white hover:text-black transition-colors duration-300 font-mono flex justify-end items-center gap-2 mb-0"
-                ):("text-white text-center hover:text-gray-400 transition-colors duration-300 font-mono flex justify-start items-center gap-2 mb-0") }
+                    "text-white text-center hover:bg-white hover:text-black p-2 m-2 transition-colors duration-300 font-mono flex justify-end items-center gap-2 mb-0"
+                ):("text-white text-center hover:text-gray-400 transition-colors p-2 m-2 duration-300 font-mono flex justify-start items-center gap-2 mb-0") }
                 >
                     <i className="fas fa-arrow-left text-center gap-2 mb-0 flex justify-start items-center"></i> Previous
                 </button>
-                <span className="text-white font-mono text-center"> Page {page}</span>            
-                <button 
-                onClick={() => changePage(page+1)} 
-                className="text-white text-center hover:bg-white hover:text-black transition-colors duration-300 font-mono flex justify-end items-center gap-2 mb-0">
-                    Next<i className="fas fa-arrow-right text-center"></i>
-                </button>            
+                <span className="text-white my-auto font-mono text-center">Page {page}</span>            
+                <Button 
+                onClick={() => changePage(page+1)}>
+                Next<i className="fas fa-arrow-right text-center"></i>
+                </Button>            
             </div>
-            <div className="flex justify-center pt-5 items-center hidden md:block">
-                <button 
-                onClick={return_} 
-                className="text-white text-center hover:bg-white hover:text-black transition-colors duration-300 font-mono flex justify-end items-center gap-2 mb-0">
-                    <i className="fas fa-arrow-left text-center"></i> Return 
-                </button>
+
+            <div className="flex justify-center pt-5 items-center flex-col md:block">
+            <Button onClick=""><i className="fas fa-plus text-center"></i>Add</Button>
+                <Button onClick={return_}><i className="fas fa-arrow-left text-center"></i>Return</Button>
             </div>
         </nav>
         <div className="columns-2 md:columns-3 gap-5 p-5" id="gallery" key="gallery">
@@ -92,20 +90,26 @@ export default function GalleryTest({returnPage}){
                     exit={{ opacity: 0, y: -50 }}
                     transition={{ duration: 0.42 }}
                     >
+                        <motion.div
+                        layout
+                        layoutId={`layout_${itm.id}`}
+                        >
                         <Image
                         onClick={(e) => handleClick(e,itm)}
-                        className={`${aspectClass} py-2 rounded-2xl object-cover`}
+                        className={`${aspectClass} py-2 shadow-2xl object-cover cursor-pointer`}
                         src={itm.download_url}
                         alt={itm.author}
                         width={400}
                         height={500}
                         />
+                        </motion.div>
                     </motion.div>
                 )
-            })}
-            </AnimatePresence>
+            // border
+            })
+        }
             {selectedImage &&  ( 
-            <Modal isOpen={open_modal} onClose={()=>openModal(false)} origin={origin} key={`modal_${selectedImage.id}`}>
+                <Modal isOpen={open_modal} onClose={()=>openModal(false)} origin={origin} key={`modal_${selectedImage.id}`} layout_id={`layout_${selectedImage.id}`}>
                 <Image
                 className="relative object-cover w-auto md:w-full h-96 md:h-auto"
                 src={selectedImage.download_url}
@@ -119,7 +123,10 @@ export default function GalleryTest({returnPage}){
                 </div>
             </Modal>
             )}
+            </AnimatePresence>
         </div>
         </>
     );
 }
+
+export default GalleryTest

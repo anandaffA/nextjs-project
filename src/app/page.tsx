@@ -4,19 +4,21 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react"
 import LoginTemplate from "./components/login";
 import ProfileIrlPage from "./components/home";
-import GalleryTest from "./components/gallery";
-
-export default function Home() {
+import GalleryTest from "./components/gallery-test";
+import Art from "./components/art";
+function Home() {
   const [page_state, pageState] = useState('login')
   const bg_url = {
     'login' :'/img/home.png',
     'profile' :'/img/profile-irl.jpg',
     'gallery' :'/img/stars_bg.jpg',
+    'test' : '/img/johnbrosio inspired.png'
   }
   const bg_credit = {
     'login' : 'ME',
     'profile' : 'Simon Stalenhag',
-    'gallery' : 'idk...'
+    'gallery' : 'idk...',
+    'test' : 'MEEE'
   }
 
   const credit = bg_credit[page_state] || 'ME'
@@ -58,13 +60,25 @@ export default function Home() {
     case 'gallery':
       content = 
         <motion.div
-        key="gallery"
+        key="gallery-test"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -50 }}
         transition={{ duration: 0.5 }}
-        className="relative h-full w-full md:w-2/3 overflow-y-auto justify-center items-center no-scrollbar">
+        className="relative h-full w-full md:w-2/3 overflow-y-auto overflow-x-auto justify-center items-center no-scrollbar">
           <GalleryTest returnPage={pageState}/>
+        </motion.div>
+      break;
+    case 'test':
+      content = 
+        <motion.div
+        key="art-gallery"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -50 }}
+        transition={{ duration: 0.5 }}
+        className="relative h-full w-full md:w-3/4 overflow-y-auto justify-center items-center no-scrollbar">
+          <Art/>
         </motion.div>
       break;
     default:
@@ -112,3 +126,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home

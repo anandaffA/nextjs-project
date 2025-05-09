@@ -1,7 +1,7 @@
 'use client'
 import { motion, AnimatePresence } from 'framer-motion'
 
-export default function Modal({ isOpen, onClose, origin="", layout_id="",children }) {
+export default function Modal({ isOpen, onClose, origin, layout_id="",children }) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -17,9 +17,9 @@ export default function Modal({ isOpen, onClose, origin="", layout_id="",childre
             className="fixed -translate-x-1/2 -translate-y-1/2 border-2 no-scrollbar border-white z-50 min-w-4/5 md:min-w-3/5 max-h-[92vh] overflow-y-auto"
             layout
             layoutId={layout_id}
-            initial={{  opacity:0, top:0, left:"50%"   }}
-            animate={{  opacity:1, top:"50%", left:"50%"   }}
-            exit   ={{  opacity:0, top:0, left:"50%"   }}
+            initial={{  opacity:0, top:origin.y, left:origin.x   }}
+            animate={{ opacity:1, top:"50%", left:"50%"   }}
+            exit   ={{  opacity:0, top:origin.y, left:origin.x   }}
             transition={{ type: "spring", stiffness: 233, damping: 33 }}
           >
             {children}
