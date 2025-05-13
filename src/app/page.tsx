@@ -8,7 +8,9 @@ import GalleryTest from "./components/gallery-test";
 import Art from "./components/art";
 
 function Home() {
-  const [page_state, pageState] = useState('login')
+  const [page_state, pageState] = useState<string>('login')
+  const [is_loaded, loadState] = useState<boolean>(false)
+  
   const bg_url = {
     'login' :'/img/home.png',
     'profile' :'/img/profile-irl.jpg',
@@ -109,18 +111,26 @@ function Home() {
           alt="LoginScreen"
           layout="fill"
           objectFit="cover"
-          priority
-          className={page_state != 'login' ? "brightness-50" : "brightness-100"}
+          onLoadingComplete={()=>loadState(true)}
+          className={page_state != 'login' ? "brightness-75" : "brightness-100"}
           />
           </motion.div>
       </AnimatePresence>
-          
+        {!is_loaded ? (
+          <div className="absolute inset-0 flex justify-center items-center">
+            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white"></div>
+          </div>
+        )
+          : (
           <div className="absolute inset-0 z-10 text-center mx-auto flex flex-col justify-center items-center font-garamond">
             <AnimatePresence mode='wait'>
             {content}
             </AnimatePresence>
           </div>
+          )
+        }
       </main>
+
       <footer className=" text-white py-3 z-10 flex justify-between items-center">
         <h3 className="font-mono text-sm text-start mx-5">Background Art by {credit}</h3>
         <h3 className="font-mono text-sm text-end mx-5">2025 GHST_</h3>
