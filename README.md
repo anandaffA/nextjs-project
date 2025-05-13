@@ -1,3 +1,9 @@
+Personal project as an online portofolio.
+
+You can track/visit my progress in ghstjs.vercel.app enter the following code as a password
+- profile : Quick summary and resume
+- gallery : art gallery, heavy WIP
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
