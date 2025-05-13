@@ -15,10 +15,12 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@supabase/supabase-js": "^2.49.4",
+    "blurhash": "^2.0.5",
     "motion": "^12.9.1",
     "next": "15.2.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "sharp": "^0.34.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

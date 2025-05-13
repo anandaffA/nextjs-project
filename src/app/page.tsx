@@ -15,13 +15,13 @@ function Home() {
     'login' :'/img/home.png',
     'profile' :'/img/profile-irl.jpg',
     'gallery' :'/img/stars_bg.jpg',
-    'test' : '/img/johnbrosio inspired.png'
+    'art' : '/img/johnbrosio inspired.png'
   }
   const bg_credit = {
     'login' : 'ME',
     'profile' : 'Simon Stalenhag',
     'gallery' : 'idk...',
-    'test' : 'MEEE'
+    'art' : 'MEEE'
   }
 
   const credit = bg_credit[page_state] || 'ME'
@@ -63,7 +63,7 @@ function Home() {
           <ProfileIrlPage pageReturn={pageState}/>
         </motion.div>
       break;
-    case 'gallery':
+    case 'gallerytest':
       content = 
         <motion.div
         key="gallery-test"
@@ -75,7 +75,7 @@ function Home() {
           <GalleryTest returnPage={pageState}/>
         </motion.div>
       break;
-    case 'test':
+    case 'art':
       content = 
         <motion.div
         key="art-gallery"
@@ -84,7 +84,7 @@ function Home() {
         exit={{ opacity: 0, y: -50 }}
         transition={{ duration: 0.5 }}
         className="relative h-full w-full md:w-5/6 overflow-y-auto justify-center items-center no-scrollbar">
-          <Art/>
+          <Art returnPage={pageState} isLoading={loadState}/>
         </motion.div>
       break;
     default:
@@ -112,9 +112,9 @@ function Home() {
           <Image
           src={bg_switch}
           alt="LoginScreen"
-          layout="fill"
+          fill          
           objectFit="cover"
-          onLoadingComplete={()=>loadState(true)}
+          onLoad={()=>loadState(true)}
           className={page_state != 'login' ? "brightness-75" : "brightness-100"}
           />
           </motion.div>
@@ -122,9 +122,15 @@ function Home() {
 
           <div className="absolute inset-0 z-10 text-center mx-auto flex flex-col justify-center items-center font-garamond">
             <AnimatePresence mode='wait'>
-            { !is_loaded ? (<div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white"></div>)
-            :(<>{content}</>)
-            }
+                { !is_loaded ? (
+                  <div className="absolute inset-0 flex justify-center items-center brightness-75">
+                  <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white"></div>
+                </div>
+                ):
+                  <>
+                {content}
+                </>
+                }
             </AnimatePresence>
           </div>
       </main>
