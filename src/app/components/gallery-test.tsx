@@ -13,7 +13,10 @@ import Modal from "./modal";
         url: string;
         download_url: string;
       };
-    
+    type imagePos = {
+        x: number;
+        y: number;
+    };
     const [data, setData] = useState<ImageItem[]>([]); 
     const [page, setPage] = useState(1)
     const return_ = () => {
@@ -35,7 +38,7 @@ import Modal from "./modal";
 
     const [open_modal, openModal] = useState(false)
     const [selectedImage, setSelectedImage] = useState<ImageItem | null>(null);
-    const [origin, setOrigin] = useState({ x: 0, y: 0 })
+    const [origin, setOrigin] = useState<imagePos>({ x: 0, y: 0 })
 
     const handleClick = (event,itm) => {
         const rect = event.currentTarget.getBoundingClientRect()

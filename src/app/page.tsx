@@ -6,6 +6,7 @@ import LoginTemplate from "./components/login";
 import ProfileIrlPage from "./components/home";
 import GalleryTest from "./components/gallery-test";
 import Art from "./components/art";
+
 function Home() {
   const [page_state, pageState] = useState('login')
   const bg_url = {
@@ -77,11 +78,13 @@ function Home() {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -50 }}
         transition={{ duration: 0.5 }}
-        className="relative h-full w-full md:w-3/4 overflow-y-auto justify-center items-center no-scrollbar">
+        className="relative h-full w-full md:w-5/6 overflow-y-auto justify-center items-center no-scrollbar">
           <Art/>
         </motion.div>
       break;
     default:
+      alert('Invalid Entry!')
+      pageState('login')
       break;
   }
 
