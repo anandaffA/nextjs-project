@@ -1,6 +1,6 @@
 'use client'
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react"
 import LoginTemplate from "./components/login";
 import ProfileIrlPage from "./components/home";
@@ -33,6 +33,9 @@ function Home() {
   // }
   let content
 
+  useEffect(()=>{
+    loadState(false)
+  },[bg_switch])
   switch (page_state) {
     case 'login':
       content = <motion.div
@@ -116,19 +119,14 @@ function Home() {
           />
           </motion.div>
       </AnimatePresence>
-        {!is_loaded ? (
-          <div className="absolute inset-0 flex justify-center items-center">
-            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white"></div>
-          </div>
-        )
-          : (
+
           <div className="absolute inset-0 z-10 text-center mx-auto flex flex-col justify-center items-center font-garamond">
             <AnimatePresence mode='wait'>
-            {content}
+            { !is_loaded ? (<div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white"></div>)
+            :(<>{content}</>)
+            }
             </AnimatePresence>
           </div>
-          )
-        }
       </main>
 
       <footer className=" text-white py-3 z-10 flex justify-between items-center">
