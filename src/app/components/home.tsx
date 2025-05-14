@@ -23,11 +23,11 @@ export default function ProfileIrlPage({pageReturn}){
 
     return ( 
         <>
-        <div className="relative z-10 items-center  justify-center">
-            <div className="flex flex-col md:flex-row gap-4">
+        <div className="relative z-10 items-center justify-center w-full h-full md:w-auto md:h-auto">
+            <div className="flex flex-col md:flex-row gap-4 w-full h-full md:w-auto md:h-auto">
                 <motion.div 
                 onClick={handleClick}
-                className="relative w-96 h-80 md:w-96 md:h-96 basis-1/3">
+                className="relative m-4 md:m-0 md:w-96 h-100 overflow-y-auto">
                     <Image
                     src={'/img/knight_placeholder.jpg'}
                     alt="placeholder"
@@ -56,7 +56,7 @@ export default function ProfileIrlPage({pageReturn}){
         </div>
         <button 
         onClick={return_} 
-        className="text-white text-center hover:bg-white hover:text-black transition-colors duration-300 font-mono flex justify-end items-center gap-2 p-2">
+        className="text-white text-center hover:bg-white mb-18 md:0 hover:text-black transition-colors duration-300 font-mono flex justify-end items-center gap-2 p-4 md:p-2">
             <i className="fas fa-arrow-left text-center"></i> Return 
         </button>
         <Modal isOpen={open_profile} onClose={()=>OpenProfile(false)} origin={origin}>

@@ -12,6 +12,7 @@ function Art({returnPage, isLoading}){
     description: string;
     path: string;
     blur: string;
+    file_name:string;
     };
 
     type OpenImageData = {
@@ -20,6 +21,7 @@ function Art({returnPage, isLoading}){
     description: string;
     path: string;
     blur: string;
+    file_name: string;
     };
 
     const [is_open_form, openForm] = useState<boolean>(false)
@@ -83,6 +85,7 @@ function Art({returnPage, isLoading}){
             'blur' : hash.blurHash,
             'created_at': new Date()
         }])
+
         if (insertError){
             alert(`Failed to Insert Database with ${insertError.message}`)
             return false;
@@ -96,6 +99,20 @@ function Art({returnPage, isLoading}){
         openImage(data)
         openImageModal(true)
     }
+
+    const deleteImage = async (id:string, file_name:string) => {
+        if (confirm("Are you sure you want to delete this image?")){
+            isLoading(false)
+            const {error:error_row} = await supabase.from('gallery').delete().eq('id',id)
+            if (error_row) { alert (`Failed to Delete Image! with row ${error_row}`); isLoading(true);return false; }
+            const {error:error_storage} = await supabase.storage.from('art-images').remove([file_name])
+            if (error_storage) { alert (`Failed to Delete Image! with storage ${error_storage}`); isLoading(true); return false;}
+            alert("Image Deleted!")
+            isLoading(true)
+            return true
+        } else {return false}
+    }
+
 
     useEffect( () => {
         const get_images = async () =>{
@@ -189,7 +206,11 @@ function Art({returnPage, isLoading}){
                         height={800}
                         />
                         <div className="flex flex-1 flex-col">
-                            <p className="text-white text-start p-4 flex align-middle text-xl text border-white border-b border-dashed"> {open_image.title}</p>
+                            <div className="flex justify-between p-4 border-white border-b border-dashed">
+                            <p className="text-white text-start flex align-middle text-xl "> {open_image.title}</p>
+                            <button type="button" onClick={()=> deleteImage(open_image.id,open_image.file_name)}><i 
+                            className="fas fa-close text-white hover:text-red-600 transition-colors duration-300 cursor-pointer"></i> </button>
+                            </div>
                             <p className="text-white text-start p-4 flex align-middle text-lg"> {open_image.description}</p>
                         </div>
                 </Modal>
