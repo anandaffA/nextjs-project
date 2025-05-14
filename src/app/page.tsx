@@ -1,5 +1,6 @@
 'use client'
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react"
 import LoginTemplate from "./components/login";
@@ -10,6 +11,7 @@ import Art from "./components/art";
 function Home() {
   const [page_state, pageState] = useState<string>('login')
   const [is_loaded, loadState] = useState<boolean>(false)
+  const router = useRouter()
   
   const bg_url = {
     'login' :'/img/home.png',
@@ -87,6 +89,9 @@ function Home() {
           <Art returnPage={pageState} isLoading={loadState}/>
         </motion.div>
       break;
+    case 'forest':
+      router.push('/forest')
+      break;
     default:
       alert('Invalid Entry!')
       pageState('login')
@@ -131,7 +136,7 @@ function Home() {
               bounce:0.2,
               ease: "easeInOut"
             }}
-            className="absolute inset-0 flex justify-center items-center z-20 bg-black bg-opacity-25">
+            className="absolute inset-0 flex justify-center items-center z-20 bg-black/35">
               <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white z-30"></div>
             </motion.div>
           )}

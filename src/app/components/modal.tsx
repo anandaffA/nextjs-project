@@ -14,7 +14,7 @@ export default function Modal({ isOpen, onClose, origin={x:0, y:0}, layout_id=""
             onClick={onClose}
             />
           <motion.div
-            className="fixed -translate-x-1/2 left-1/2 -translate-y-1/2 border-2 no-scrollbar border-white z-50 min-w-4/5 md:min-w-3/5 max-h-[92vh] overflow-y-auto overflow-x-auto"
+            className="fixed -translate-x-1/2 left-1/2 -translate-y-1/2 border-2 no-scrollbar border-white z-50 min-w-4/5 md:min-w-3/5 max-h-[92vh] md:overflow-y-auto"
             layout
             layoutId={layout_id}
             initial={{  opacity:0, top:origin.y  }}

@@ -198,13 +198,15 @@ function Art({returnPage, isLoading}){
 
             {open_image &&  ( 
                 <Modal isOpen={is_open_image} onClose={()=>openImageModal(false)} key={`modal_${open_image.id}`} layout_id={`layout_${open_image.id}`}>
+                        {/* <div className="w-[1000px] md:w-auto overflow-x-auto md:overflow-x-visible no-scrollbar"> */}
                         <Image
-                        className="relative object-cover w-auto md:w-full h-96 md:h-auto"
+                        className="relative object-contain w-full h-96 md:h-auto"
                         src={open_image.path}
                         alt={`alt_${open_image.title}`}
-                        width={400}
-                        height={800}
+                        width={800}
+                        height={600}
                         />
+                        {/* </div> */}
                         <div className="flex flex-1 flex-col">
                             <div className="flex justify-between p-4 border-white border-b border-dashed">
                             <p className="text-white text-start flex align-middle text-xl "> {open_image.title}</p>
