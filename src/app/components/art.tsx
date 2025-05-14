@@ -113,16 +113,15 @@ function Art({returnPage, isLoading}){
     return(
         <>
             <nav className="flex items-center justify-center md:justify-between px-5">
-                <div className="flex flex-col items-center md:flex-row md:items-end gap-2 pt-5">
+                {/* <div className="flex flex-col items-center md:flex-row md:items-end gap-2 pt-5"> */}
                     <Button onClick={openForm_}>
                     <i className="fas fa-plus text-center"></i> Add Image
                     </Button>
-                </div>
+                {/* </div> */}
                     <Button onClick={() => returnPage('login')}>
                     <i className="fas fa-arrow-left text-center"></i> Return
                     </Button>
             </nav>
-
 
             <div className="relative  columns-2 md:columns-4">
                     {images.map(img =>{
@@ -142,7 +141,6 @@ function Art({returnPage, isLoading}){
                         )
                     })}
             </div>
-
 
             { is_open_form && (
                 <Modal isOpen={is_open_form} onClose={()=>openForm(false)}>

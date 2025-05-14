@@ -122,15 +122,13 @@ function Home() {
 
           <div className="absolute inset-0 z-10 text-center mx-auto flex flex-col justify-center items-center font-garamond">
             <AnimatePresence mode='wait'>
-                { !is_loaded ? (
-                  <div className="absolute inset-0 flex justify-center items-center brightness-75">
-                  <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white"></div>
-                </div>
-                ):
-                  <>
+                { !is_loaded && (
+                  <div className="absolute inset-0 flex justify-center items-center brightness-50">
+                    <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white"></div>
+                  </div>
+                )}
                 {content}
-                </>
-                }
+                
             </AnimatePresence>
           </div>
       </main>
