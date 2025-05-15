@@ -113,7 +113,6 @@ function Art({returnPage, isLoading}){
         } else {return false}
     }
 
-
     useEffect( () => {
         const get_images = async () =>{
             const {data, error} = await supabase.from('gallery').select('*')
@@ -144,7 +143,7 @@ function Art({returnPage, isLoading}){
                     {images.map(img =>{
                         return(
                             <Image
-                            className={`py-2 shadow-2xl object-cover cursor-pointer transition duration-700 ease-in-out`}
+                            className={`py-2 shadow-2xl object-cover cursor-pointer transition duration-700 ease-in-out md:rounded-0 rounded-2xl`}
                             key={`img_${img.id}`}
                             onClick={()=>clickImage(img)}
                             src={img.path}

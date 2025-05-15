@@ -29,6 +29,7 @@
   
   --color-forest-moss : var(--color-moss);
   --color-forest-mist : var(--color-mist);
+  --color-forest-bark : var(--color-bark);
   --color-forest-bg : var(--color-bg);
   --color-forest-fog : var(--color-fog);
   --color-forest-tint : var(--color-tint);
@@ -55,5 +56,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif, Garamond;
 }
