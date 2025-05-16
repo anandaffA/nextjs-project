@@ -63,7 +63,6 @@ export default function LoginTemplate({onLogin,testConfirm}){
                 <AnimatePresence mode='wait'>
                 {!input_state && (
                     <motion.div
-                    layout
                     initial = {{opacity:0, y:0}}
                     animate = {{opacity:1, y:15}}
                     exit =    {{opacity:0, y:0}}
@@ -72,17 +71,17 @@ export default function LoginTemplate({onLogin,testConfirm}){
                         bounce: 0.3,
                         ease: "easeInOut"
                     }}
-                     className="flex flex-row text-white text-xl font-mono z-10 items-center text-center">
+                     className="flex flex-col md:flex-row text-white text-xl font-mono z-10 items-center text-center">
                         <span onClick={()=>{onLogin('profile')}} 
                         className="hover:bg-white hover:text-black/90 transition-colors duration-300 cursor-pointer py-5 px-8 border-1 bg-black/25"> Profile </span>
                         <span onClick={()=>{onLogin('art')}} 
-                        className="hover:bg-white hover:text-black/90 transition-colors duration-300 cursor-pointer py-5 px-8 border-y-1 bg-black/25"> Art </span>
+                        className="hover:bg-white hover:text-black/90 transition-colors duration-300 cursor-pointer py-5 px-8 border-1 md:border-x-0 md:border-y-1 bg-black/25"> Art </span>
                         <span onClick={()=>{testConfirm('forest')}} 
                         className="hover:bg-white hover:text-black/90 transition-colors duration-300 cursor-pointer py-5 px-8 border-1 bg-black/25"> For.est </span>
                         <a href="https://drive.google.com/file/d/1AsD75NDhPs0-to42Zv2b38iQq0zhzBbc/view?usp=sharing" 
                         target="_blank" rel="noopener noreferrer"
-                        className="hover:bg-white hover:text-black/90 transition-colors duration-300 cursor-pointer py-5 px-8 border-y-1 border-r-1 bg-black/25
-                        ">Resume <i className="fas fa-download"></i></a>
+                        className="hover:bg-white hover:text-black/90 transition-colors duration-300 cursor-pointer py-5 px-8 border-y-1 border-r-1 border-l-1 md:border-l-0  bg-black/25">
+                        Resume <i className="fas fa-download"></i></a>
                     </motion.div>
                 )}
                 </AnimatePresence>
