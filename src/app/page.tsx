@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react"
+import Modal from "./components/modal";
 import LoginTemplate from "./components/login";
 import ProfileIrlPage from "./components/home";
 import GalleryTest from "./components/gallery-test";
@@ -10,6 +11,7 @@ import Art from "./components/art";
 
 function Home() {
   const [page_state, pageState] = useState<string>('login')
+  const [page_confirm, confirmState] = useState<string>('')
   const [is_loaded, loadState] = useState<boolean>(false)
   const router = useRouter()
   
@@ -33,11 +35,13 @@ function Home() {
   //   pageState(input)
   //   console.log("LOGIN_HANDLER: ",page_state)
   // }
-  let content
+  let content: React.ReactNode;
+
 
   useEffect(()=>{
     loadState(false)
   },[bg_switch])
+
   switch (page_state) {
     case 'login':
       content = <motion.div
@@ -48,7 +52,7 @@ function Home() {
       transition={{ duration: 0.5 }}
       >
       <div className="flex-1 flex z-10">
-        <LoginTemplate onLogin={pageState}/>
+        <LoginTemplate onLogin={pageState} testConfirm={confirmState}/>
       </div>
       </motion.div>
       break;
@@ -65,7 +69,7 @@ function Home() {
           <ProfileIrlPage pageReturn={pageState}/>
         </motion.div>
       break;
-    case 'gallerytest':
+    case 'gallery':
       content = 
         <motion.div
         key="gallery-test"
@@ -146,6 +150,19 @@ function Home() {
                 {content}
             </AnimatePresence>
           </div>
+
+            <Modal isOpen={page_confirm} onClose={()=>confirmState('')}>
+            <div className="flex flex-1 flex-col p-4">
+              <span className="text-white p-2 font-mono text-center ">Experimental feature in Development! Proceed?</span>
+              <div className="flex flex-1 flex-row gap-8 text-white text-center font-mono items-center justify-center">
+                <span onClick={()=>pageState(page_confirm)} 
+                className="hover:bg-white hover:text-black/80 transition-colors cursor-pointer p-4 w-50 border-1">Yes</span>
+                <span onClick={()=>confirmState('')}
+                className="hover:bg-white hover:text-black/80 transition-colors cursor-pointer p-4 w-50 border-1">No</span>
+              </div>
+            </div>
+            </Modal>
+
       </main>
 
       <footer className=" text-white py-3 z-10 flex justify-between items-center">

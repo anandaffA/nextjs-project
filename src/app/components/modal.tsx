@@ -1,9 +1,9 @@
 'use client'
 import { motion, AnimatePresence } from 'framer-motion'
 
-export default function Modal({ isOpen, onClose, origin={x:0, y:0}, layout_id="",children }) {
+export default function Modal({ isOpen, onClose, origin={x:0, y:0}, layout_id="", children }) {
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {isOpen && (
         <>
           <motion.div

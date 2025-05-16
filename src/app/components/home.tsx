@@ -46,7 +46,7 @@ export default function ProfileIrlPage({pageReturn}){
                     <div className="p-5 text-white border-1 ring-white">26 y/o (29 April 1999)</div>
                     <div className="p-5 border-1 ring-white text-white">Last Education: </div>
                     <div className="p-5 text-white border-1 ring-white">Binus University (IT), S1</div>
-                    <a href="https://drive.google.com/file/d/1yUWHHTvW4hvroIqWinTavjgK8Y50ernF/view?usp=sharing" 
+                    <a href="https://drive.google.com/file/d/1AsD75NDhPs0-to42Zv2b38iQq0zhzBbc/view?usp=sharing" 
                     target="_blank" rel="noopener noreferrer"
                     className="col-span-2 p-5 border-1 ring-white text-white
                     transition-colors duration-300 hover:bg-white hover:text-black

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "motion/react"
 
 
   
-export default function LoginTemplate({onLogin}){
+export default function LoginTemplate({onLogin,testConfirm}){
     
     const [input_state, state_function] = useState(false);
     const [input_value, setInput] = useState('')
@@ -35,7 +35,7 @@ export default function LoginTemplate({onLogin}){
                     <motion.div
                     initial={{ opacity: 0}}
                     animate={{ opacity: 1}}
-                    exit={{ opacity: 0   }}
+                    exit={{    opacity: 0   }}
                     transition={{
                         duration: 0.5,
                         bounce: 0.3,
@@ -46,7 +46,6 @@ export default function LoginTemplate({onLogin}){
             }
             </AnimatePresence>
             <motion.div
-            onClick={() => state_function(!input_state)}
             animate={{ y: input_state ? (isSmallScreen ? -80 : -125) : 0 }}
             //animate={{ y: input_state? -20 : 0 }}
             transition={{
@@ -55,9 +54,38 @@ export default function LoginTemplate({onLogin}){
                 bounce: 0.15,
                 ease: "easeInOut",
                 }}
-                className="absolute flex flex-row">
-                <h1 className="font-bold text-7xl lg:text-9xl md:text-6xl text-white">GHST</h1>
-                <span className="animate-typography font-bold text-6xl lg:text-9xl md:text-6xl -mt-4 text-white">_</span>
+                className="absolute flex flex-col">
+                <div className="flex flex-row justify-center">
+                    <h1 onClick={() => state_function(!input_state)}
+                        className="font-bold text-7xl lg:text-9xl md:text-6xl text-white cursor-pointer">GHST</h1>
+                    <span className="animate-typography font-bold text-6xl lg:text-9xl md:text-6xl -mt-4 text-white">_</span>
+                </div>
+                <AnimatePresence mode='wait'>
+                {!input_state && (
+                    <motion.div
+                    layout
+                    initial = {{opacity:0, y:0}}
+                    animate = {{opacity:1, y:15}}
+                    exit =    {{opacity:0, y:0}}
+                    transition={{
+                        duration: 0.33,
+                        bounce: 0.3,
+                        ease: "easeInOut"
+                    }}
+                     className="flex flex-row text-white text-xl font-mono z-10 items-center text-center">
+                        <span onClick={()=>{onLogin('profile')}} 
+                        className="hover:bg-white hover:text-black/90 transition-colors duration-300 cursor-pointer py-5 px-8 border-1 bg-black/25"> Profile </span>
+                        <span onClick={()=>{onLogin('art')}} 
+                        className="hover:bg-white hover:text-black/90 transition-colors duration-300 cursor-pointer py-5 px-8 border-y-1 bg-black/25"> Art </span>
+                        <span onClick={()=>{testConfirm('forest')}} 
+                        className="hover:bg-white hover:text-black/90 transition-colors duration-300 cursor-pointer py-5 px-8 border-1 bg-black/25"> For.est </span>
+                        <a href="https://drive.google.com/file/d/1AsD75NDhPs0-to42Zv2b38iQq0zhzBbc/view?usp=sharing" 
+                        target="_blank" rel="noopener noreferrer"
+                        className="hover:bg-white hover:text-black/90 transition-colors duration-300 cursor-pointer py-5 px-8 border-y-1 border-r-1 bg-black/25
+                        ">Resume <i className="fas fa-download"></i></a>
+                    </motion.div>
+                )}
+                </AnimatePresence>
             </motion.div>
         <AnimatePresence initial={true}>
           { 
