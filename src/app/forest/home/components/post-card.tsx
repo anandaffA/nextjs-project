@@ -1,22 +1,24 @@
 import Image from "next/image";
 
-function Post({ title, description, img_src }) {
+function Post({ title, description, img_src = "" }) {
   return (
     <div
-      className="relative min-h-md w-full mx-auto flex flex-col gap-5 bg-white
+      className="relative min-h-md w-full mx-auto flex flex-col gap-2 bg-white
               border-grey-200 shadow-lg shadow-forest-highlight/75
             rounded-xl outline-1 outline-forest-bark/35    
               "
     >
-      {/* <div className="relative w-full aspect-3/2">
-        <Image
-          key={`key_${title}`}
-          src={img_src}
-          alt="example"
-          className="rounded-t-lg object-cover"
-          fill
-        />
-      </div> */}
+      {img_src && (
+        <div className="relative w-full h-92 rounded-t-xl overflow-hidden">
+          <Image
+            key={`key_${title}`}
+            src={img_src}
+            alt="example"
+            className="rounded-t-lg object-cover"
+            fill
+          />
+        </div>
+      )}
       <h1 className="text-xl text-forest-moss font-semibold p-3 border-b-1 border-dashed">
         {title}{" "}
       </h1>
