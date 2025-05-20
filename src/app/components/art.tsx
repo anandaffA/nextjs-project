@@ -6,7 +6,8 @@ import { supabase } from "../../../lib/supabase";
 import Image from "next/image";
 import { blurHashToDataURL } from "../utils/blurdecode";
 //import ImageModal from "./artModal";
-//import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import TestModal from "./artModal";
 
 function Art({ returnPage, isLoading, isAdmin }) {
   type ImageData = {
@@ -34,6 +35,9 @@ function Art({ returnPage, isLoading, isAdmin }) {
   const [images, imageData] = useState<ImageData[]>([]);
   const [open_image, openImage] = useState<OpenImageData | null>(null);
   //const [is_loading, loadState] = useState<boolean>(false)
+
+  const ImageMotion = motion(Image);
+  const ModalMotion = motion(TestModal);
 
   const openForm_ = () => {
     openForm(true);
@@ -151,6 +155,32 @@ function Art({ returnPage, isLoading, isAdmin }) {
     get_images();
   }, []);
 
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  const imageVariants = {
+    hidden: (i) => ({
+      y: -50, // Start 100px left
+      opacity: 0,
+    }),
+    visible: (i) => ({
+      y: 0,
+      opacity: 1,
+      transition: {
+        delay: i * 0.15,
+        type: "spring",
+        stiffness: 100,
+        damping: 20,
+      },
+    }),
+  };
+
   return (
     <>
       <nav className="flex items-center justify-center md:justify-between px-5">
@@ -166,22 +196,47 @@ function Art({ returnPage, isLoading, isAdmin }) {
         </Button>
       </nav>
 
-      <div className="relative  columns-2 md:columns-4">
+      {/* <div className="relative  columns-2 md:columns-4">
         {images.map((img) => {
           return (
-            // <motion.img
-            //   className="py-2 shadow-2xl object-cover cursor-pointer transition duration-700 ease-in-out md:rounded-0 rounded-2xl"
-            //   key={`img_${img.id}`}
-            //   layoutId={`layout_${img.id}`}
-            //   onClick={() => clickImage(img)}
-            //   src={img.path}
-            //   alt={img.title}
-            //   loading="lazy"
-            //   width={400}
-            //   height={500}
-            // />
-            <Image
-              className={`py-2 shadow-2xl object-cover cursor-pointer transition duration-700 ease-in-out md:rounded-0 rounded-2xl`}
+            <motion.div
+              layout
+              key={`img_${img.id}`}
+              layoutId={`layout_${img.id}`}
+            >
+              <ImageMotion
+                className={`py-2 shadow-2xl object-cover cursor-pointer transition duration-700 ease-in-out md:rounded-0 rounded-2xl`}
+                key={`img_${img.id}`}
+                onClick={() => clickImage(img)}
+                src={img.path}
+                alt={img.title}
+                placeholder="blur"
+                blurDataURL={blurHashToDataURL(img.blur, 32, 32)}
+                loading="lazy"
+                width={400}
+                height={500}
+              />
+            </motion.div>
+          );
+        })}
+      </div> */}
+
+      <motion.div
+        className="relative columns-2 md:columns-4"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {images.map((img, i) => (
+          <motion.div
+            layout
+            key={`img_${img.id}`}
+            layoutId={`layout_${img.id}`}
+            variants={imageVariants}
+            custom={i} // pass index for stagger
+          >
+            <ImageMotion
+              className="py-2 shadow-2xl object-cover cursor-pointer transition duration-700 ease-in-out md:rounded-0 rounded-2xl"
               key={`img_${img.id}`}
               onClick={() => clickImage(img)}
               src={img.path}
@@ -192,9 +247,9 @@ function Art({ returnPage, isLoading, isAdmin }) {
               width={400}
               height={500}
             />
-          );
-        })}
-      </div>
+          </motion.div>
+        ))}
+      </motion.div>
 
       {is_open_form && (
         <Modal isOpen={is_open_form} onClose={() => openForm(false)}>
@@ -258,16 +313,17 @@ function Art({ returnPage, isLoading, isAdmin }) {
       )}
 
       {open_image && (
-        <Modal
+        <ModalMotion
           isOpen={is_open_image}
           onClose={() => openImageModal(false)}
           key={`modal_${open_image.id}`}
           layout_id={`layout_${open_image.id}`}
         >
-          <Image
+          <ImageMotion
             className="relative object-contain w-full h-96 md:h-auto"
             src={open_image.path}
             alt={`alt_${open_image.title}`}
+            layoutId={`layout_${open_image.id}`}
             width={800}
             height={600}
           />
@@ -293,29 +349,8 @@ function Art({ returnPage, isLoading, isAdmin }) {
               {open_image.description}
             </p>
           </div>
-        </Modal>
+        </ModalMotion>
       )}
-      {/* <AnimatePresence>
-        {is_open_image && (
-          <>
-            <motion.div
-              className="fixed inset-0 bg-black/50 z-20"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => openImageModal(false)}
-            />
-            <ImageModal
-              imageUrl={open_image.path}
-              key={`modal_${open_image.id}`}
-              title="Smooth Modal"
-              description="Framer Motion layoutId animation works perfectly now!"
-              layoutIdPrefix={`layout_${open_image.id}`}
-              onClose={() => openImageModal(false)}
-            />
-          </>
-        )}
-      </AnimatePresence> */}
     </>
   );
 }

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { motion } from "motion/react";
-import Modal from "./modal";
+// import Modal from "./modal";
 import TestModal from "./artModal";
 
 // import { fas, fad, fass, fasds } from '@awesome.me/'

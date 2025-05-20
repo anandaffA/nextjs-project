@@ -4,13 +4,13 @@
   --background: #ffffff;
   --foreground: #171717;
   /* for.est */
-  --color-bg: #0D1B1E; /* Deep pine green */
-  --color-mist: #C8D5CD; /* Pale sage */
-  --color-moss: #5A7C5F; /* Forest floor green */
-  --color-bark: #3B2F2F; /* Deep bark brown */
-  --color-fog: #8E9E91; /* Desaturated cool grey */
-  --color-highlight: #76977C; /* Muted olive highlight */
-  --color-tint: #A9B9AC; /* Misty cool neutral */
+  --color-bg: #0d1b1e; /* Deep pine green */
+  --color-mist: #c8d5cd; /* Pale sage */
+  --color-moss: #5a7c5f; /* Forest floor green */
+  --color-bark: #3b2f2f; /* Deep bark brown */
+  --color-fog: #8e9e91; /* Desaturated cool grey */
+  --color-highlight: #76977c; /* Muted olive highlight */
+  --color-tint: #a9b9ac; /* Misty cool neutral */
 }
 .no-scrollbar {
   scrollbar-width: none;
@@ -20,28 +20,31 @@
   display: none;
 }
 
+/* animus style */
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-garamond: var(--font-eb-garamond);
-  
-  --color-forest-moss : var(--color-moss);
-  --color-forest-mist : var(--color-mist);
-  --color-forest-bark : var(--color-bark);
-  --color-forest-bg : var(--color-bg);
-  --color-forest-fog : var(--color-fog);
-  --color-forest-tint : var(--color-tint);
-  --color-forest-highlight : var(--color-highlight);
+
+  --color-forest-moss: var(--color-moss);
+  --color-forest-mist: var(--color-mist);
+  --color-forest-bark: var(--color-bark);
+  --color-forest-bg: var(--color-bg);
+  --color-forest-fog: var(--color-fog);
+  --color-forest-tint: var(--color-tint);
+  --color-forest-highlight: var(--color-highlight);
 
   --animate-typography: blink 1s step-start infinite;
   @keyframes blink {
-    0%, 50% {
-      opacity:0
+    0%,
+    50% {
+      opacity: 0;
     }
-    100%{
-      opacity:1
+    100% {
+      opacity: 1;
     }
   }
 }

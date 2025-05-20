@@ -7,7 +7,6 @@ export default function LoginTemplate({ onLogin, testConfirm }) {
   const [input_state, state_function] = useState(false);
   const [input_value, setInput] = useState("");
   const submit_ = (e) => {
-    console.log("SUBMIT FROM LOGIN: ", input_value);
     e.preventDefault();
     onLogin(input_value);
   };
@@ -105,12 +104,12 @@ export default function LoginTemplate({ onLogin, testConfirm }) {
                 For.est{" "}
               </span>
               <a
-                href="https://drive.google.com/file/d/1AsD75NDhPs0-to42Zv2b38iQq0zhzBbc/view?usp=sharing"
+                href="https://drive.google.com/file/d/110VlrxSP8hopxlJkAWVzQ74AbLII0wCS/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:bg-white hover:text-black/90 transition-colors duration-300 cursor-pointer py-5 px-8 border-y-1 border-r-1 border-l-1 md:border-l-0  bg-black/25"
               >
-                Resume <i className="fas fa-download"></i>
+                Resume
               </a>
             </motion.div>
           )}
