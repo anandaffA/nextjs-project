@@ -42,8 +42,9 @@ export default function LoginTemplate({ onLogin, testConfirm }) {
         ) : null}
       </AnimatePresence>
       <motion.div
+        initial={{ y: 0 }}
         animate={{ y: input_state ? (isSmallScreen ? -80 : -125) : 0 }}
-        //animate={{ y: input_state? -20 : 0 }}
+        exit={{ y: 0 }}
         transition={{
           type: "spring",
           visualDuration: 0.5,

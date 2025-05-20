@@ -20,12 +20,14 @@ function Home() {
     profile: "/img/profile-irl.jpg",
     gallery: "/img/stars_bg.jpg",
     art: "/img/johnbrosio inspired.png",
+    ghostscales: "/img/johnbrosio inspired.png",
   };
   const bg_credit = {
     login: "ME",
     profile: "Simon Stalenhag",
     gallery: "idk...",
     art: "MEEE",
+    ghostscales: "Myself",
   };
 
   const credit = bg_credit[page_state] || "ME";
@@ -95,7 +97,21 @@ function Home() {
           transition={{ duration: 0.5 }}
           className="relative h-full w-full md:w-6/7 overflow-y-auto justify-center items-center no-scrollbar"
         >
-          <Art returnPage={pageState} isLoading={loadState} />
+          <Art returnPage={pageState} isLoading={loadState} isAdmin={false} />
+        </motion.div>
+      );
+      break;
+    case "ghostscales":
+      content = (
+        <motion.div
+          key="art-gallery-admin"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          transition={{ duration: 0.5 }}
+          className="relative h-full w-full md:w-6/7 overflow-y-auto justify-center items-center no-scrollbar"
+        >
+          <Art returnPage={pageState} isLoading={loadState} isAdmin={true} />
         </motion.div>
       );
       break;
@@ -181,7 +197,7 @@ function Home() {
         </Modal>
       </main>
 
-      <footer className=" text-white py-3 z-10 flex justify-between items-center">
+      <footer className=" text-white py-3 z-10 flex justify-between items-center bg-gradient-to-t from-black/50 to-black/0">
         <h3 className="font-mono text-sm text-start mx-5">
           Background Art by {credit}
         </h3>
