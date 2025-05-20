@@ -10,7 +10,7 @@ import TestModal from "./artModal";
 // import { fas, fad, fass, fasds } from '@awesome.me/'
 export default function ProfileIrlPage({ pageReturn }) {
   const [open_profile, OpenProfile] = useState(false);
-  const [origin, setOrigin] = useState({ x: 0, y: 0 });
+  // const [origin, setOrigin] = useState({ x: 0, y: 0 });
 
   const MotionImage = motion(Image);
 

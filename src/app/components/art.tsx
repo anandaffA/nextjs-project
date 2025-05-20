@@ -6,7 +6,7 @@ import { supabase } from "../../../lib/supabase";
 import Image from "next/image";
 import { blurHashToDataURL } from "../utils/blurdecode";
 //import ImageModal from "./artModal";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import TestModal from "./artModal";
 
 function Art({ returnPage, isLoading, isAdmin }) {
@@ -34,6 +34,7 @@ function Art({ returnPage, isLoading, isAdmin }) {
   const [preview, setPreview] = useState<string | null>(null);
   const [images, imageData] = useState<ImageData[]>([]);
   const [open_image, openImage] = useState<OpenImageData | null>(null);
+  const [refresh, setRefresh] = useState<boolean>(false);
   //const [is_loading, loadState] = useState<boolean>(false)
 
   const ImageMotion = motion(Image);
@@ -106,6 +107,13 @@ function Art({ returnPage, isLoading, isAdmin }) {
     } else {
       isLoading(true);
       alert("Success!");
+      setRefresh(!refresh);
+      openForm(false);
+      setFile(null);
+      setPreview(null);
+      setTitle(null);
+      setDesc(null);
+      return true;
     }
   };
 
@@ -153,7 +161,7 @@ function Art({ returnPage, isLoading, isAdmin }) {
       }
     };
     get_images();
-  }, []);
+  }, [refresh]);
 
   const containerVariants = {
     hidden: {},
@@ -165,7 +173,7 @@ function Art({ returnPage, isLoading, isAdmin }) {
   };
 
   const imageVariants = {
-    hidden: (i) => ({
+    hidden: () => ({
       y: -50, // Start 100px left
       opacity: 0,
     }),

@@ -8,7 +8,6 @@ import LoginTemplate from "./components/login";
 import ProfileIrlPage from "./components/home";
 import GalleryTest from "./components/gallery-test";
 import Art from "./components/art";
-import AnimusBackground from "./components/animus-bg";
 
 function Home() {
   const [page_state, pageState] = useState<string>("login");
