@@ -7,7 +7,7 @@ import Image from "next/image";
 import { blurHashToDataURL } from "../utils/blurdecode";
 //import ImageModal from "./artModal";
 import { motion } from "framer-motion";
-import TestModal from "./artModal";
+// import TestModal from "./artModal";
 
 function Art({ returnPage, isLoading, isAdmin }) {
   type ImageData = {
@@ -174,7 +174,7 @@ function Art({ returnPage, isLoading, isAdmin }) {
 
   const imageVariants = {
     hidden: () => ({
-      y: -50, // Start 100px left
+      y: -50,
       opacity: 0,
     }),
     visible: (i) => ({
@@ -203,31 +203,6 @@ function Art({ returnPage, isLoading, isAdmin }) {
           <i className="fas fa-arrow-left text-center"></i> Return
         </Button>
       </nav>
-
-      {/* <div className="relative  columns-2 md:columns-4">
-        {images.map((img) => {
-          return (
-            <motion.div
-              layout
-              key={`img_${img.id}`}
-              layoutId={`layout_${img.id}`}
-            >
-              <ImageMotion
-                className={`py-2 shadow-2xl object-cover cursor-pointer transition duration-700 ease-in-out md:rounded-0 rounded-2xl`}
-                key={`img_${img.id}`}
-                onClick={() => clickImage(img)}
-                src={img.path}
-                alt={img.title}
-                placeholder="blur"
-                blurDataURL={blurHashToDataURL(img.blur, 32, 32)}
-                loading="lazy"
-                width={400}
-                height={500}
-              />
-            </motion.div>
-          );
-        })}
-      </div> */}
 
       <motion.div
         className="relative columns-2 md:columns-4"

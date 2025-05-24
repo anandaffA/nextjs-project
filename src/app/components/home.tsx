@@ -45,7 +45,7 @@ export default function ProfileIrlPage({ pageReturn }) {
           </motion.div>
 
           {/* <h1 className="text-white text-8xl">TESTINGG</h1> */}
-          <div className="grid my-auto grid-cols-2 gap-3 px-3 md:px-0 text-lg basis-2/3 font-mono">
+          <div className="grid py-5 my-auto grid-cols-2 gap-3 px-3 md:px-0 text-lg basis-2/3 font-mono">
             <div className="p-5 border-1 ring-white text-white">Name: </div>
             <div className="p-5 text-white border-1 ring-white">
               Anandaffa Apriadi
@@ -93,10 +93,11 @@ export default function ProfileIrlPage({ pageReturn }) {
       </div>
       <button
         onClick={return_}
-        className="hidden text-white text-center hover:bg-white mb-18 md:0 hover:text-black transition-colors duration-300 font-mono md:flex justify-end items-center gap-2 p-4 md:p-2"
+        className="hidden text-white text-center  hover:bg-white mb-12 md:0 hover:text-black transition-colors duration-300 font-mono md:flex justify-end items-center gap-2 p-4 md:p-2"
       >
         <i className="fas fa-arrow-left text-center"></i> Return
       </button>
+
       <TestModal
         isOpen={open_profile}
         layout_id="profile"
