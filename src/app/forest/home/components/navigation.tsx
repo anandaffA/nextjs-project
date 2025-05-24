@@ -1,4 +1,4 @@
-'use client";';
+"use client";
 import { useRouter } from "next/navigation";
 function Navbar() {
   const router = useRouter();

@@ -20,9 +20,6 @@ function HeaderPost({ loadState, refreshState }) {
   };
 
   const submitPost = async () => {
-    console.log("SUBMIT POST");
-    console.log("POST CONTENT: ", postContent);
-    console.log("IMG FILE: ", imgFile);
     if (!postContent && !imgFile) {
       alert("Please enter some content or upload an image.");
       return;
@@ -30,7 +27,6 @@ function HeaderPost({ loadState, refreshState }) {
     let hash = "";
     let img_url = "";
     loadState(true);
-    // blur generate
     if (imgFile) {
       const arrayBuffer = await imgFile.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer).toString("base64");
@@ -140,11 +136,11 @@ function HeaderPost({ loadState, refreshState }) {
 
         {/* border */}
 
-        <div className="p-2 mb-2 flex">
+        <div className="py-2 px-4 mb-2 flex flex-1  items-center">
           <button
             className="text-base font-bold cursor-pointer 
                          text-white
-                        px-4 bg-forest-moss transition-colors duration-300 rounded-full"
+                        px-4 h-[40]  bg-forest-moss transition-colors duration-300 rounded-full"
             type="submit"
           >
             New Post{" "}
