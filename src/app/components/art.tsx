@@ -37,8 +37,8 @@ function Art({ returnPage, isLoading, isAdmin }) {
   const [refresh, setRefresh] = useState<boolean>(false);
   //const [is_loading, loadState] = useState<boolean>(false)
 
-  const ImageMotion = motion(Image);
-  const ModalMotion = motion(TestModal);
+  // const ImageMotion = motion(Image);
+  // const ModalMotion = motion(TestModal);
 
   const openForm_ = () => {
     openForm(true);
@@ -237,13 +237,13 @@ function Art({ returnPage, isLoading, isAdmin }) {
       >
         {images.map((img, i) => (
           <motion.div
-            layout
+            // layo
             key={`img_${img.id}`}
-            layoutId={`layout_${img.id}`}
+            // layoutId={`layout_${img.id}`}
             variants={imageVariants}
             custom={i} // pass index for stagger
           >
-            <ImageMotion
+            <Image
               className="py-2 shadow-2xl object-cover cursor-pointer transition duration-700 ease-in-out md:rounded-0 rounded-2xl"
               key={`img_${img.id}`}
               onClick={() => clickImage(img)}
@@ -321,17 +321,17 @@ function Art({ returnPage, isLoading, isAdmin }) {
       )}
 
       {open_image && (
-        <ModalMotion
+        <Modal
           isOpen={is_open_image}
           onClose={() => openImageModal(false)}
           key={`modal_${open_image.id}`}
-          layout_id={`layout_${open_image.id}`}
+          // layout_id={`layout_${open_image.id}`}
         >
-          <ImageMotion
+          <Image
             className="relative object-contain w-full h-96 md:h-auto"
             src={open_image.path}
             alt={`alt_${open_image.title}`}
-            layoutId={`layout_${open_image.id}`}
+            // layoutId={`layout_${open_image.id}`}
             width={800}
             height={600}
           />
@@ -357,7 +357,7 @@ function Art({ returnPage, isLoading, isAdmin }) {
               {open_image.description}
             </p>
           </div>
-        </ModalMotion>
+        </Modal>
       )}
     </>
   );
