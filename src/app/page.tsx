@@ -116,7 +116,7 @@ function Home() {
       );
       break;
     case "forest":
-      router.push("/forest/home");
+      router.push("/forest");
       break;
     default:
       alert("Invalid Entry!");
@@ -175,8 +175,8 @@ function Home() {
         </div>
 
         <Modal isOpen={page_confirm} onClose={() => confirmState("")}>
-          <div className="flex flex-1 flex-col p-4">
-            <span className="text-white p-2 font-mono text-center ">
+          <div className="flex md:flex-1 flex-col p-4">
+            <span className="text-white p-2 font-mono text-center mb-3 ">
               Experimental feature in Development! Proceed?
             </span>
             <div className="flex flex-1 flex-row gap-8 text-white text-center font-mono items-center justify-center">

@@ -1,14 +1,19 @@
 "use client";
 import Image from "next/image";
 import LoginCard from "./components/loginCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 // import { cookies } from "next/headers";
 
 export default function Home() {
   const [page_state, pageState] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   let content;
+
+  useEffect(() => {
+    console.log("isLoading changed: ", isLoading);
+  }, [isLoading]);
 
   switch (page_state) {
     case "login":
@@ -20,7 +25,7 @@ export default function Home() {
           exit={{ opacity: 0, y: 50 }}
           transition={{ duration: 0.5 }}
         >
-          <LoginCard />
+          <LoginCard setLoading={setIsLoading} />
         </motion.div>
       );
       break;
@@ -38,7 +43,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
           >
             --- Under Development ---
-            <br></br>- Click to Login -
+            <br />- Click to Login -
           </motion.h1>
         </div>
       );
@@ -70,6 +75,24 @@ export default function Home() {
               priority
             />
           </motion.div>
+        </AnimatePresence>
+        <AnimatePresence mode="wait">
+          {isLoading && (
+            <motion.div
+              key="loading_spinner"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                duration: 0.2,
+                bounce: 0.2,
+                ease: "easeInOut",
+              }}
+              className="absolute inset-0 flex justify-center items-center z-99 bg-black/65"
+            >
+              <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white z-30"></div>
+            </motion.div>
+          )}
         </AnimatePresence>
         <div className="absolute inset-0 z-10 text-center mx-auto flex flex-col justify-center items-center font-garamond">
           <AnimatePresence mode="wait">{content}</AnimatePresence>
