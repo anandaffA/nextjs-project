@@ -46,33 +46,63 @@ export async function signup(
     password: formData.get("password") as string,
   };
 
+  
+  const { data:authData,error: signUperror } = await supabase.auth.signUp(data);
+  
+  if (signUperror) {
+    // redirect("/error");
+    return { error: signUperror.message };
+  }
+  
+  const userId = authData?.user?.id;
+  
+  if (!userId) {
+    return { error: "User ID not found after sign-up." };
+  }
+  
   const data_user = {
+    uuid: userId as string,
     email: formData.get("email") as string,
     name: formData.get("name") as string,
     username: formData.get("username") as string,
   };
-  console.log("SIGNUP DATA: ", data);
-  console.log("SIGNUP USER DATA: ", data_user);
-
-  const { error } = await supabase.auth.signUp(data);
 
   const { data: user, error: userError } = await supabase
-    .from("users")
-    .insert(data_user)
-    .select();
-
-  if (error) {
-    // redirect("/error");
-    return { error: error.message };
-  }
-
+  .from("users")
+  .insert(data_user)
+  .select();
+  
+  
   if (userError) {
     console.error("User creation error:", userError);
     return { error: userError.message };
   }
-
+  
   console.log("User created:", user);
-
+  
   revalidatePath("/", "layout");
   redirect("/forest/components/check-email/");
 }
+
+export async function logout() {
+  const supabase = await createClient();
+  await supabase.auth.signOut();
+  redirect("/forest");
+}
+
+export async function requireSession() {
+  console.log('--- Checking Session ---')
+  const supabase = await createClient();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session) {
+    redirect("/forest"); // or to "/login"
+  }
+
+  return session;
+}
+
+
+

@@ -26,7 +26,7 @@ export default function Main() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [refresh, setRefresh] = useState<boolean>(false);
   const [images, setImages] = useState<image[]>([]);
-
+  
   const refreshHandler = () => {
     setRefresh((prev) => !prev);
   };
@@ -40,6 +40,8 @@ export default function Main() {
     }
     test_api();
   }, []);
+  
+  
 
   // from supabase
   useEffect(() => {
@@ -56,6 +58,7 @@ export default function Main() {
     };
     getImages();
   }, [refresh]);
+
   return (
     <>
       {/* loading spinner */}
@@ -84,32 +87,32 @@ export default function Main() {
 
       {/* from supabase */}
       {images.map((post) => (
-        <div
-          key={`key_${post.content}`}
-          className="backdrop-blur-md bg-white/10 border border-white/20 rounded-xl p-4 shadow-md"
-        >
+        // <div
+        //   key={`key_${post.content}`}
+        //   className="backdrop-blur-md bg-white/10 border border-white/20 rounded-xl p-4 shadow-md"
+        // >
           <Post
             key={post.content}
             title="Username"
             description={post.content}
             img_src={post.img}
           />
-        </div>
+        // </div>
       ))}
 
       {/* Dummy */}
       {dummy.map((post) => (
-        <div
-          key={`key_${post.id}`}
-          className="backdrop-blur-md bg-white/10 border border-white/20 rounded-xl p-4 shadow-md"
-        >
+        // <div
+        //   key={`key_${post.id}`}
+        //   className="backdrop-blur-md bg-white/10 border border-white/20 rounded-xl p-4 shadow-md"
+        // >
           <Post
             key={post.id}
             title={post.title}
             description={post.body}
             img_src={`https://picsum.photos/seed/what_${post.id}/400/300`}
           />
-        </div>
+        // </div>
       ))}
       {/* end center */}
       {/* end main content */}

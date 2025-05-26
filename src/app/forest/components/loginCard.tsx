@@ -43,14 +43,14 @@ export default function LoginCard({ setLoading }) {
 
   return (
     <>
-      <div className="relative flex flex-col md:flex-row h-screen w-screen">
-        <div className="md:w-2/3 md:h-full w-full h-1/2" />
+      <div className="relative flex h-screen w-screen">
+        {/* <div className="md:w-2/3 md:h-full w-full h-1/2" /> */}
         <form
           action={handleSubmit_login}
-          className="relative flex flex-1 flex-col md:w-1/3 md:h-full w-full h-1/2 justify-items align-center p-8 z-10 bg-forest-tint"
+          className="relative flex mx-auto my-auto flex-col md:w-1/3 w-1/2 h-1/2 shadow-2xl bg-black/10 justify-center align-center p-14 z-10"
         >
-          <h1 className="md:text-8xl text-4xl text-forest-bark">FOR.EST</h1>
-          <span className="text-forest-bark text-lg">
+          <h1 className="md:text-8xl text-6xl text-white/90 text-shadow-2xs text-shadow-black">FOR.EST</h1>
+          <span className="text-black/90 text-2xl">
             Because people are too much.
           </span>
           <div className="flex flex-col gap-4 mt-8">
@@ -73,18 +73,18 @@ export default function LoginCard({ setLoading }) {
           </div>
           {/* Inline error message */}
           {state?.error && (
-            <p className="text-red-800 text-sm mt-3">{state.error}</p>
+            <p className="text-red-200 text-sm mt-3">{state.error}</p>
           )}
           <div className="flex md:gap-8 gap-4 align-top justify-center">
             <button
               // formAction={formAction}
-              className="text-forest-bark md:text-2xl text-xl m-4 hover:text-forest-moss cursor-pointer transition-colors duration-300 hover:underline-offset-1 hover:underline"
+              className="text-white/90 md:text-2xl text-xl m-4 hover:text-forest-moss cursor-pointer transition-colors duration-300 hover:underline-offset-1 hover:underline"
             >
               Login
             </button>
             <span
               onClick={() => setOpenForm(true)}
-              className="text-forest-bark md:text-2xl text-xl m-4 hover:text-forest-moss cursor-pointer transition-colors duration-300 hover:underline-offset-1 hover:underline"
+              className="text-white/90 md:text-2xl text-xl m-4 hover:text-forest-moss cursor-pointer transition-colors duration-300 hover:underline-offset-1 hover:underline"
             >
               Register
             </span>
@@ -124,7 +124,7 @@ export default function LoginCard({ setLoading }) {
           </div>
           {/* Inline error message */}
           {state_signup?.error && (
-            <p className="text-red-800 text-sm mt-3">{state.error}</p>
+            <p className="text-red-200 text-sm mt-3">{state.error}</p>
           )}
           <button
             // formAction={formSignup}

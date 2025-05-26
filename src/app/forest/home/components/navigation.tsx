@@ -1,7 +1,5 @@
-"use client";
-import { useRouter } from "next/navigation";
+import { logout } from "../../components/login/actions";
 function Navbar() {
-  const router = useRouter();
   return (
     <nav className="bg-forest-bark sticky flex justify-between shadow-xl p-3 z-10">
       <div className="font-bold text-forest-mist my-auto text-2xl ">
@@ -23,10 +21,7 @@ function Navbar() {
         <div
           className="text-bold text-forest-mist hover:text-white transition-colors
          duration-300 cursor-pointer"
-          onClick={() => {
-            // Add your logout logic here
-            router.push("/");
-          }}
+          onClick={logout}
         >
           Logout
         </div>
