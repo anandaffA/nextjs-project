@@ -21,7 +21,7 @@ export default function Modal({
           />
           <motion.div
             className="fixed -translate-x-1/2 left-1/2 -translate-y-1/2 border-2 
-            no-scrollbar border-white z-99 min-w-3/5  md:min-w-3/5 max-w-[92vw] max-h-[92vh] 
+            no-scrollbar border-white z-99 min-w-4/5 md:min-w-4/5 max-w-[94vw] max-h-[94vh] 
             md:overflow-y-auto"
             layout
             layoutId={layout_id}
