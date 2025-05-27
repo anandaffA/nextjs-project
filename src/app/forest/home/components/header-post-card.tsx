@@ -2,9 +2,11 @@
 import { useState } from "react";
 import Image from "next/image";
 import { supabase } from "../../../../../lib/supabase";
-function HeaderPost({ loadState, refreshState }) {
+import { useLoading } from "@/app/components/loading-context";
+function HeaderPost({ refreshState }) {
   const [preview, setPreview] = useState<string | null>(null);
   const [imgFile, setImgFile] = useState<File | null>(null);
+  const { setLoading } = useLoading();
 
   const [postContent, setPostContent] = useState("");
 
@@ -26,7 +28,7 @@ function HeaderPost({ loadState, refreshState }) {
     }
     let hash = "";
     let img_url = "";
-    loadState(true);
+    setLoading(true);
     if (imgFile) {
       const arrayBuffer = await imgFile.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer).toString("base64");
@@ -44,7 +46,7 @@ function HeaderPost({ loadState, refreshState }) {
         .upload(file_name, imgFile);
       if (error_storage) {
         alert(`Image Upload failed with : ${error_storage.message}`);
-        loadState(false);
+        setLoading(false);
         return false;
       }
 
@@ -72,7 +74,7 @@ function HeaderPost({ loadState, refreshState }) {
     setPostContent("");
     setImgFile(null);
     setPreview(null);
-    loadState(false);
+    setLoading(false);
     refreshState();
   };
 

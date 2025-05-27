@@ -6,44 +6,25 @@ import { ReactNode } from "react";
 import Image from "next/image";
 import SidebarLeft from "./components/sidebar-left";
 import SidebarRight from "./components/sidebar-right";
-import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import LoadingOverlay from "@/app/components/loading-layout";
+import { LoadingProvider } from "../../components/loading-context";
 
-export default function ForestLayout({ children }: { children: ReactNode }) {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+export default function RootLayout({ children }: { children: ReactNode }) {
+
   return (
     <div className="font-garamond min-h-screen w-screen flex flex-col">
       <Navbar />
+      <LoadingProvider>
+      <LoadingOverlay/>
       <main className="relative flex md:px-12 flex-row flex-grow w-full max-w-full max-h-full h-full">
         <Image
           src={"/img/forest.jpg"}
           alt="background-forest"
-          onLoad={() => setIsLoading(false)}
           fill
           className="absolute z-0 brightness-75"
           priority
         />
-
-        {/* loading spinner */}
-        <AnimatePresence mode="wait">
-          {isLoading && (
-            <motion.div
-              key="loading_spinner"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{
-                duration: 0.2,
-                bounce: 0.2,
-                ease: "easeInOut",
-              }}
-              className="absolute inset-0 flex justify-center items-center z-20 bg-black/35"
-            >
-              <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white z-30"></div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-        {/* loading spinner */}
 
         <SidebarLeft />
         {/* Main content area */}
@@ -55,6 +36,7 @@ export default function ForestLayout({ children }: { children: ReactNode }) {
         <SidebarRight />
       </main>
       <Footer />
+      </LoadingProvider>
     </div>
   );
 }

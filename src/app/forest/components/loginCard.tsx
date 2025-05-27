@@ -47,10 +47,10 @@ export default function LoginCard({ setLoading }) {
         {/* <div className="md:w-2/3 md:h-full w-full h-1/2" /> */}
         <form
           action={handleSubmit_login}
-          className="relative flex mx-auto my-auto flex-col md:w-1/3 w-1/2 h-1/2 shadow-2xl bg-black/10 justify-center align-center p-14 z-10"
+          className="relative flex mx-auto my-auto flex-col md:w-2/5 w-[92vw] h-1/2 md:h-3/5 shadow-2xl bg-black/10 justify-center align-center p-12 z-10"
         >
-          <h1 className="md:text-8xl text-6xl text-white/90 text-shadow-2xs text-shadow-black">FOR.EST</h1>
-          <span className="text-black/90 text-2xl">
+          <h1 className="md:text-8xl text-6xl text-white/85 text-shadow-2xs text-shadow-black">FOR.EST</h1>
+          <span className="text-white/80 text-2xl">
             Because people are too much.
           </span>
           <div className="flex flex-col gap-4 mt-8">
