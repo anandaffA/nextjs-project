@@ -16,16 +16,19 @@ type PostType = {
   content: string;
   img: string;
   created_at: string;
+  profile_picture:string;
+  name:string;
 };
 
 type User = {
+  id:number,
   name:string,
   username:string,
   age: number,
   gender: string,
   profile_picture: string, 
   description: string,
-  uuid:string
+  uuid:string,
 }
 
 export default function ProfilePage() {
@@ -40,6 +43,7 @@ export default function ProfilePage() {
   const [user, setUser] = useState<User[]>([])
   const [isClose, setClose] = useState<boolean>(false)
 
+  // const [profImg, setProfImg] = useState<File | null>(null);
   const [name, setName] = useState<string|null>(null)
   const [username, setUsername] = useState<string|null>(null)
   const [age, setAge] = useState<number|null>(null)
@@ -49,6 +53,45 @@ export default function ProfilePage() {
 
   const refreshHandler = () => {
     setRefresh((prev) => !prev);
+  };
+
+  const imageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file){
+      setLoading(true)
+      let img_url = ""
+      const file_format = file.name.split(".").pop();
+      const file_name = `${Date.now()}.${file_format}`;
+      const { error: error_storage } = await supabase.storage
+        .from("profile-picture")
+        .upload(file_name, file);
+        
+      if (error_storage) {
+        alert(`Image Upload failed with : ${error_storage.message}`);
+        setLoading(false);
+        return false;
+      }
+  
+      const { data: get_url } = await supabase.storage
+        .from("profile-picture")
+        .getPublicUrl(file_name);   
+
+      img_url = get_url.publicUrl;
+
+      const {error : error_update} = await supabase.from('users')
+      .update({profile_picture : img_url})
+      .eq('uuid',user['uuid'])
+      if (error_update){
+        alert(`Failed to Update Profile Picture with: ${error_update}`)
+        setLoading(false)
+        return false;
+      }
+      alert("Profile Picture Updated!")
+      setLoading(false)
+      setRefresh((prev) => !prev)
+      return true;
+    } 
+
   };
 
   const editProfile = async (e) => {
@@ -66,10 +109,9 @@ export default function ProfilePage() {
       setLoading(false)
       return false;
     }
-    console.log("Update: ",data)
     alert(`User Info Updated! ${data}`)
     setLoading(false)
-    setRefresh(!refresh)
+    setRefresh((prev) => !prev)
     return true
   }
   
@@ -95,20 +137,21 @@ export default function ProfilePage() {
      }
    };
    fetchSession();
- }, [supabase]);
+ }, []);
 
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
       const { data: postData } = await supabase
-        .from("posts")
+        .from("dashboard_view")
         .select("*")
+        .eq('user_id',user['id'])
         .order("created_at", { ascending: false });
       setPosts(postData || []);
     };
     fetchData();
     setLoading(false);
-  }, [refresh]);
+  }, [refresh, user]);
 
   return (
     <>
@@ -116,14 +159,20 @@ export default function ProfilePage() {
         {/* profile */}
         {user && (
           <div className="relative -mt-0 z-10 flex flex-col items-center text-center px-4">
-            <div className="w-32 h-32 relative">
+            <label className="w-32 h-32 relative cursor-pointer">
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={imageHandler}
+              />
               <Image
                 src={user['profile_picture'] || "https://picsum.photos/200"}
                 alt="avatar"
                 layout="fill"
                 className="rounded-full border-4 border-white/30 shadow-md"
               />
-            </div>
+            </label>
             <h1 className="mt-4 text-2xl font-bold">{user['name']}
             <i className="px-2 fas fa-edit text-white cursor-pointer text-sm" onClick={()=>(setClose(true))}></i>
             </h1>
@@ -145,22 +194,19 @@ export default function ProfilePage() {
             className="backdrop-blur-md bg-white/10 border border-white/20 rounded-xl p-4 shadow-md"
           > */}
             <HeaderPost
+              user = {user}
               refreshState={refreshHandler}
             />
           {/* </div> */}
           {posts.length > 0 ? (
-            posts.map((post) => (
-              // <div
-              //   key={post.id}
-              //   className="backdrop-blur-md bg-white/10 border border-white/20 rounded-xl p-4 shadow-md"
-              // >
+            posts.map((post, index) => (
                 <Post
-                  title="Post"
-                  key={post.id}
+                  title={post.name}
+                  key={`post_${index}`}
                   description={post.content}
                   img_src={post.img}
+                  profile_picture = {post.profile_picture}
                 />
-              // </div>
             ))
           ) : (
             <div className="text-white/60 text-center italic">

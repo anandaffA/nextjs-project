@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-function Post({ title = "", description = "", img_src = "" }) {
+function Post({ title = "", description = "", img_src = "",profile_picture="" }) {
   return (
     <div
       className="relative min-h-md w-full mx-auto flex flex-col gap-1 bg-white
@@ -14,7 +14,7 @@ function Post({ title = "", description = "", img_src = "" }) {
           <Image
             key={`key_${title}`}
             src={img_src}
-            alt="example"
+            alt=""
             className="rounded-t-lg object-cover w-full h-auto"
             width={800} // or any default/fallback width
             height={600} // optional but helps calculate aspect ratio
@@ -24,8 +24,8 @@ function Post({ title = "", description = "", img_src = "" }) {
       {/* border */}
       <div className="flex flex-row items-center gap-2  p-3 border-b-1 border-dashed">
         <Image
-          src={img_src ? img_src : "https://picsum.photos/seed/picsum/45/45"}
-          alt={title}
+          src={profile_picture ? profile_picture : "https://picsum.photos/seed/picsum/45/45"}
+          alt={`img_${title}`}
           className="rounded-full object-cover aspect-square border-1 border-forest-bark/35"
           key={`key_${title}_img`}
           width={45}

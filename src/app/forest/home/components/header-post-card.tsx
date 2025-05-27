@@ -1,11 +1,14 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import { supabase } from "../../../../../lib/supabase";
 import { useLoading } from "@/app/components/loading-context";
-function HeaderPost({ refreshState }) {
+import { createClient } from "../../../../../lib/supabaseClient";
+
+function HeaderPost({ refreshState, user }) {
+  const supabase = createClient()
   const [preview, setPreview] = useState<string | null>(null);
   const [imgFile, setImgFile] = useState<File | null>(null);
+  
   const { setLoading } = useLoading();
 
   const [postContent, setPostContent] = useState("");
@@ -14,7 +17,6 @@ function HeaderPost({ refreshState }) {
 
   const imageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    console.log("FILE: ", file);
     setImgFile(file || null);
     if (file) {
       setPreview(URL.createObjectURL(file));
@@ -58,6 +60,7 @@ function HeaderPost({ refreshState }) {
 
     const { data, error } = await supabase.from("posts").insert([
       {
+        user_id: user['id'],
         content: postContent,
         img: img_url,
         placeholder_img: hash,
@@ -112,7 +115,7 @@ function HeaderPost({ refreshState }) {
         {/* border */}
         <div className="flex flex-row items-center gap-2  p-3 border-b-1 border-dashed">
           <Image
-            src={"https://picsum.photos/seed/picsum/45/45"}
+            src={user['profile_picture'] || "https://picsum.photos/seed/picsum/45/45"}
             alt={title}
             className="rounded-full object-cover aspect-square border-1 border-forest-bark/35"
             key={`key_${title}_img`}
@@ -120,7 +123,7 @@ function HeaderPost({ refreshState }) {
             height={45}
           />
           <span className="text-xl text-center font-semibold text-forest-bark/75">
-            Username
+            {user['name']}
           </span>
         </div>
         {/* border */}

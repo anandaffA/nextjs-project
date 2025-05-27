@@ -1,5 +1,8 @@
 import { logout } from "../../components/login/actions";
+import { useRouter } from "next/navigation";
+
 function Navbar() {
+  const router = useRouter()
   return (
     <nav className="bg-forest-bark sticky flex justify-between shadow-xl p-3 z-10">
       <div className="font-bold text-forest-mist my-auto text-2xl ">
@@ -12,10 +15,14 @@ function Navbar() {
         Search{" "}
       </div>
       <div className="flex flex-row gap-5 px-5 items-center ">
-        <div className="text-bold text-forest-mist hover:text-white transition-colors duration-300 cursor-pointer">
+        <div 
+        onClick={()=>router.push('/forest/home/')}
+        className="text-bold text-forest-mist hover:text-white transition-colors duration-300 cursor-pointer">
           Dashboard
         </div>
-        <div className="text-bold text-forest-mist hover:text-white transition-colors duration-300 cursor-pointer">
+        <div 
+        onClick={()=>router.push('/forest/home/profile')}
+        className="text-bold text-forest-mist hover:text-white transition-colors duration-300 cursor-pointer">
           Profile
         </div>
         <div
