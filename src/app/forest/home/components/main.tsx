@@ -16,6 +16,7 @@ type image = {
   modified_at: string;
   profile_picture:string;
   name:string;
+  user_id:number;
 };
 
 type User = {
@@ -26,6 +27,7 @@ type User = {
   profile_picture: string, 
   description: string,
   uuid:string
+  id:number;
 }
 
 export default function Main() {
@@ -34,6 +36,8 @@ export default function Main() {
   const [refresh, setRefresh] = useState<boolean>(false);
   const [images, setImages] = useState<image[]>([]);
   const [user, setUser] = useState<User[]>([])
+  // const [isUser, setIsUser] = useState<boolean>(false)
+
   const supabase = createClient()
 
   // const {isLoading} = useLoading()
@@ -59,7 +63,6 @@ export default function Main() {
        if (error) {
          console.error("Error fetching user:", error);
        } else {
-         console.log("User data:", userData);
          setUser(userData)
        }
      }
@@ -90,20 +93,22 @@ export default function Main() {
       <HeaderPost refreshState={refreshHandler} user={user} />
 
       {/* from supabase */}
-      {images.map((post, index) => (
-        // <div
-        //   key={`key_${post.content}`}
-        //   className="backdrop-blur-md bg-white/10 border border-white/20 rounded-xl p-4 shadow-md"
-        // >
-          <Post
-            title={post.name}
-            key={`post_${index}`}
-            description={post.content}
-            img_src={post.img}
-            profile_picture = {post.profile_picture}
-          />
-        // </div>
-      ))}
+      {images.length > 0 ? (
+      images.map((post, index) => {
+        const isUser = post['user_id'] == user['id']; 
+        return(
+        <Post
+          key={`post_${index}`}
+          post={post}
+          isUser={isUser}
+        />
+        )
+      }
+      )) : (
+            <div className="text-white/60 text-center italic">
+              No posts yet.
+            </div>
+          )}
 
       {/* end center */}
       {/* end main content */}

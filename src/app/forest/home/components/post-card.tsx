@@ -1,6 +1,11 @@
+'use client'
 import Image from "next/image";
+import { useEffect } from "react";
 
-function Post({ title = "", description = "", img_src = "",profile_picture="" }) {
+function Post({ post, isUser }) {
+  useEffect(()=>{
+    console.log("Status: ", isUser)
+  },[isUser])
   return (
     <div
       className="relative min-h-md w-full mx-auto flex flex-col gap-1 bg-white
@@ -9,11 +14,11 @@ function Post({ title = "", description = "", img_src = "",profile_picture="" })
               "
     >
       {/* border */}
-      {img_src && (
+      {post.img && (
         <div className="relative w-full rounded-t-xl overflow-hidden">
           <Image
-            key={`key_${title}`}
-            src={img_src}
+            key={`key_${post.name}`}
+            src={post.img}
             alt=""
             className="rounded-t-lg object-cover w-full h-auto"
             width={800} // or any default/fallback width
@@ -24,20 +29,20 @@ function Post({ title = "", description = "", img_src = "",profile_picture="" })
       {/* border */}
       <div className="flex flex-row items-center gap-2  p-3 border-b-1 border-dashed">
         <Image
-          src={profile_picture ? profile_picture : "https://picsum.photos/seed/picsum/45/45"}
-          alt={`img_${title}`}
+          src={post.profile_picture ? post.profile_picture : "https://picsum.photos/seed/picsum/45/45"}
+          alt={`img_${post.name}`}
           className="rounded-full object-cover aspect-square border-1 border-forest-bark/35"
-          key={`key_${title}_img`}
+          key={`key_${post.name}_img`}
           width={45}
           height={45}
         />
         <span className="text-xl text-center font-semibold text-forest-bark/75">
-          {title}
+          {post.name}
         </span>
       </div>
       {/* border */}
-      <p className="text-lg text-forest-moss p-3">{description}</p>
-      <div className="p-2 mb-2">
+      <p className="text-lg text-forest-moss p-3">{post.content}</p>
+      <div className="p-2 mb-2 flex justify-between items-center">
         <button
           className="text-base p-2 font-bold cursor-pointer 
                         text-forest-moss hover:text-white
@@ -45,6 +50,16 @@ function Post({ title = "", description = "", img_src = "",profile_picture="" })
         >
           Read More <i className="fas fa-chevron-right"></i>{" "}
         </button>
+        {isUser && (
+          <div className="flex">
+            <span className="cursor-pointer px-5 text-black">
+              <i className="fas fa-edit"></i> Edit
+            </span>
+            <span className="cursor-pointer px-5 text-black">
+              <i className="fas fa-close"></i> Delete
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

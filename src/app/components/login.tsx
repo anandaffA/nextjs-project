@@ -59,7 +59,7 @@ export default function LoginTemplate({ onLogin, testConfirm }) {
           >
             GHST
           </h1>
-          <span className="animate-typography font-bold text-6xl lg:text-9xl md:text-6xl -mt-4 text-white">
+          <span className="animate-typography font-bold text-6xl lg:text-9xl md:text-6xl md:-mt-4 text-white">
             _
           </span>
         </div>

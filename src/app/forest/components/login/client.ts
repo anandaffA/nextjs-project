@@ -19,7 +19,6 @@ export async function getUser(){
         if (error) {
             console.error("Error fetching user:", error);
         } else {
-            console.log("User data:", userData);
             return userData
         }
         }

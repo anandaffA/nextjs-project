@@ -131,7 +131,6 @@ export default function ProfilePage() {
        if (error) {
          console.error("Error fetching user:", error);
        } else {
-         console.log("User data:", userData);
          setUser(userData)
        }
      }
@@ -199,15 +198,16 @@ export default function ProfilePage() {
             />
           {/* </div> */}
           {posts.length > 0 ? (
-            posts.map((post, index) => (
+            posts.map((post, index) => {
+              const isUser = post['user_id'] == user['id']; 
+              return (
                 <Post
-                  title={post.name}
                   key={`post_${index}`}
-                  description={post.content}
-                  img_src={post.img}
-                  profile_picture = {post.profile_picture}
+                  post={post}
+                  isUser={isUser}
                 />
-            ))
+              )
+          })
           ) : (
             <div className="text-white/60 text-center italic">
               No posts yet.
