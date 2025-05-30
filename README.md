@@ -1,8 +1,10 @@
 Personal project as an online portofolio.
 
-You can track/visit my progress in ghstjs.vercel.app enter the following code as a password
-- profile : Quick summary and resume
-- gallery : art gallery, heavy WIP
+You can track/visit my progress in ghstjs.vercel.app.
+
+- Profile : A summary of me and my experience, you can see my resume here.
+- Art : Collection of drawings i did throughout the years.
+- For.est : A Mockup social media site with fully working login and register function with functional posting system.
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
