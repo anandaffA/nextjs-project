@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import HeaderPost from "./header-post-card";
 import Post from "./post-card";
+import { fetchSession } from "../../components/login/client";
 import { createClient } from "../../../../../lib/supabaseClient";
 // import { createClient } from "../../../../../lib/supabaseServer";
 import Form from "../../components/form";
@@ -48,27 +49,33 @@ export default function Main() {
 
   //fetch user
   useEffect(() => {
-   const fetchSession = async () => {
-     const {
-       data: { session },
-     } = await supabase.auth.getSession();
-     if (!session) { throw new Error ('User Not Found?')}
-     if (session?.user?.id) {
-       const { data: userData, error } = await supabase
-         .from("users")
-         .select("*")
-         .eq("uuid", session.user.id)
-         .single();
+  //  const fetchSession = async () => {
+  //    const {
+  //      data: { session },
+  //    } = await supabase.auth.getSession();
+  //    if (!session) { throw new Error ('User Not Found?')}
+  //    if (session?.user?.id) {
+  //      const { data: userData, error } = await supabase
+  //        .from("users")
+  //        .select("*")
+  //        .eq("uuid", session.user.id)
+  //        .single();
 
-       if (error) {
-         console.error("Error fetching user:", error);
-       } else {
-         setUser(userData)
-       }
-     }
-   };
-   fetchSession();
- }, [supabase]);
+  //      if (error) {
+  //        console.error("Error fetching user:", error);
+  //      } else {
+  //        setUser(userData)
+  //      }
+  //    }
+  //  };
+  //  fetchSession();
+  const getUser = async () => {
+    const session = await fetchSession()
+    console.log("debug: ", session)
+    setUser(session)
+  }
+  getUser()
+ }, []);
 
 
   // from supabase

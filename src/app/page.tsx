@@ -13,6 +13,7 @@ function Home() {
   const [page_state, pageState] = useState<string>("login");
   const [page_confirm, confirmState] = useState<string>("");
   const [is_loaded, loadState] = useState<boolean>(false);
+  const [loadForest, setLoadForest] = useState<boolean>(false);
   const router = useRouter();
 
   const bg_url = {
@@ -42,6 +43,12 @@ function Home() {
   useEffect(() => {
     loadState(false);
   }, [bg_switch]);
+
+  useEffect(()=>{
+    if (loadForest){
+      router.push('/forest')
+    }
+  },[loadForest])
 
   switch (page_state) {
     case "login":
@@ -115,9 +122,6 @@ function Home() {
         </motion.div>
       );
       break;
-    case "forest":
-      router.push("/forest");
-      break;
     default:
       alert("Invalid Entry!");
       pageState("login");
@@ -177,11 +181,11 @@ function Home() {
         <Modal isOpen={page_confirm} onClose={() => confirmState("")}>
           <div className="flex md:flex-1 flex-col p-4">
             <span className="text-white p-2 font-mono text-center mb-3 ">
-              Experimental feature in Development! Proceed?
+              FOR.est is a mock-up social media site with fully working login, register and a functional posting system, Proceed?
             </span>
             <div className="flex flex-1 flex-row gap-8 text-white text-center font-mono items-center justify-center">
               <span
-                onClick={() => pageState(page_confirm)}
+                onClick={() => setLoadForest(true)}
                 className="hover:bg-white hover:text-black/80 transition-colors cursor-pointer p-4 w-50 border-1"
               >
                 Yes

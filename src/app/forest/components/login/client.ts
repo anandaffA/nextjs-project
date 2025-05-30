@@ -26,3 +26,24 @@ export async function getUser(){
     
     return await fetchSession();
 }
+
+export const fetchSession = async () => {
+    const supabase = createClient()
+     const {
+       data: { session },
+     } = await supabase.auth.getSession();
+     if (!session) { throw new Error ('User Not Found?')}
+     if (session?.user?.id) {
+       const { data: userData, error } = await supabase
+         .from("users")
+         .select("*")
+         .eq("uuid", session.user.id)
+         .single();
+
+       if (error) {
+         console.error("Error fetching user:", error);
+       } else {
+         return userData
+       }
+     }
+   };
