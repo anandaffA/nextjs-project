@@ -10,8 +10,8 @@ import TestModal from "./artModal";
 // import { fas, fad, fass, fasds } from '@awesome.me/'
 export default function ProfileIrlPage({ pageReturn }) {
   const [open_profile, OpenProfile] = useState(false);
-  const [page, setPage] = useState<number>(1)
-  const [direction, setDirection] = useState<number>(0); 
+  const [page, setPage] = useState<number>(1);
+  const [direction, setDirection] = useState<number>(0);
 
   const variants = {
     enter: (direction) => ({
@@ -45,25 +45,25 @@ export default function ProfileIrlPage({ pageReturn }) {
     pageReturn("login");
   };
 
-  let content
+  let content;
 
-  switch (page){
+  switch (page) {
     case 1:
-      content = 
-      <motion.div
-        key={page}
-        custom={direction}
-        initial="enter"
-        animate="center"
-        exit="exit"
-        variants={variants}
-        transition={{ 
-          duration: 0.33,
-          bounce: 0.1,
-          ease:"easeInOut"
-        }}
-        className="flex w-auto h-auto"
-      >
+      content = (
+        <motion.div
+          key={page}
+          custom={direction}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          variants={variants}
+          transition={{
+            duration: 0.33,
+            bounce: 0.1,
+            ease: "easeInOut",
+          }}
+          className="flex w-auto h-auto"
+        >
           <motion.div
             layout
             onClick={() => {
@@ -90,10 +90,11 @@ export default function ProfileIrlPage({ pageReturn }) {
             <div className="p-3  text-white text-center border-1 ring-white">
               Full-stack Developer
             </div>
-            <div className="p-3 flex items-center justify-center  border-1 ring-white text-white">Contact: </div>
+            <div className="p-3 flex items-center justify-center  border-1 ring-white text-white">
+              Contact:{" "}
+            </div>
             <div className="p-3  text-white border-1 ring-white">
-              0822-1122-3413
-              anandaffa.
+              0822-1122-3413 anandaffa.
               <br className="inline md:hidden" />
               apriadi@gmail
               <br className="inline md:hidden" />
@@ -127,104 +128,120 @@ export default function ProfileIrlPage({ pageReturn }) {
             </button>
           </div>
         </motion.div>
-      break;
-    
-    case 2 :
-      content =
-      <motion.div
-        key={page}
-        custom={direction}
-        initial="enter"
-        animate="center"
-        exit="exit"
-        variants={variants}
-        transition={{ 
-          duration: 0.33,
-          bounce: 0.1,
-          ease:"easeInOut"
-        }}
-      className="flex flex-col gap-3 text-start text-2xl text-white no-scrollbar">
-        <p className="text-white mb-4">
-          This site was fully built from scratch. You can check out my source code on{" "}
-          <a
-            href="https://github.com/anandaffA/nextjs-project"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline hover:text-gray-300 transition"
-          >
-            GitHub
-          </a>.
-        </p>
-
-        <p className="font-semibold">Tools Used:</p>
-        <ul className="list-disc list-inside space-y-1">
-          <li>React</li>
-          <li>Next.js</li>
-          <li>Tailwind CSS</li>
-          <li>Supabase</li>
-          <li>GitHub & Vercel (for deployment)</li>
-        </ul>
-
-        <p className="mt-3">
-          Except the wallpapers, credits on the site&apos;s footers.
-        </p>
-      </motion.div>
+      );
       break;
 
-      case 3 :
-        content =
-      <motion.div
-        key={page}
-        custom={direction}
-        initial="enter"
-        animate="center"
-        exit="exit"
-        variants={variants}
-        transition={{ 
-          duration: 0.33,
-          bounce: 0.1,
-          ease:"easeInOut"
-        }}
-        className="flex flex-col text-white text-xl gap-3 text-start no-scrollbar">
-          <p className="m-3"> 
+    case 2:
+      content = (
+        <motion.div
+          key={page}
+          custom={direction}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          variants={variants}
+          transition={{
+            duration: 0.33,
+            bounce: 0.1,
+            ease: "easeInOut",
+          }}
+          className="flex flex-col gap-3 text-start text-2xl text-white no-scrollbar"
+        >
+          <p className="text-white mb-4">
+            This site was fully built from scratch. You can check out my source
+            code on{" "}
+            <a
+              href="https://github.com/anandaffA/nextjs-project"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-gray-300 transition"
+            >
+              GitHub
+            </a>
+            .
+          </p>
+
+          <p className="font-semibold">Tools Used:</p>
+          <ul className="list-disc list-inside space-y-1">
+            <li>React</li>
+            <li>Next.js</li>
+            <li>Tailwind CSS</li>
+            <li>Supabase</li>
+            <li>GitHub & Vercel (for deployment)</li>
+          </ul>
+
+          <p className="mt-3">
+            Except the wallpapers, credits on the site&apos;s footers.
+          </p>
+        </motion.div>
+      );
+      break;
+
+    case 3:
+      content = (
+        <motion.div
+          key={page}
+          custom={direction}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          variants={variants}
+          transition={{
+            duration: 0.33,
+            bounce: 0.1,
+            ease: "easeInOut",
+          }}
+          className="flex flex-col text-white text-xl gap-3 text-start no-scrollbar"
+        >
+          <p className="m-3">
             Graduated from Binus University, took interest in Computer Science
-            and finished with Bachelor&apos;s Degree with my super cool super awesome 2.88 GPA!
-            Finished a one year internship at PT.PhinCon as a
-            Front-end Developer using Laravel, worked in multiple web-dev projects with the
-            company throughout the years.
+            and finished with Bachelor&apos;s Degree with my super cool super
+            awesome 2.88 GPA! Finished a one year internship at PT.PhinCon as a
+            Front-end Developer using Laravel, worked in multiple web-dev
+            projects with the company throughout the years.
           </p>
           <div className="flex flex-row gap-3">
             <Image
-              src={`/img/Screenshot 2025-05-30 155515.png`}
+              src={`/img/Screenshot 2025-05-31 113301.png`}
               alt="binus pic"
               width={400}
               height={300}
               className="object-cover"
             />
             {/* --- */}
-
+            <Image
+              src={`/img/Screenshot 2025-05-31 113228.png`}
+              alt="binus pic"
+              width={400}
+              height={300}
+              className="object-cover"
+            />
+            {/* --- */}
           </div>
-      </motion.div> 
+        </motion.div>
+      );
       break;
 
-      case 4 :
-        content =
-      <motion.div
-        key={page}
-        custom={direction}
-        initial="enter"
-        animate="center"
-        exit="exit"
-        variants={variants}
-        transition={{ 
-          duration: 0.33,
-          bounce: 0.1,
-          ease:"easeInOut"
-        }}
-        className="flex flex-col text-white text-xl gap-3 text-start no-scrollbar">
-          <p className="m-3"> 
-            Took multiple years of break from IT and started my own Freelance Illustrator Career, Drawing
-            has always been my hobby and COVID was still a thing, so i figure why not make it into my job?
+    case 4:
+      content = (
+        <motion.div
+          key={page}
+          custom={direction}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          variants={variants}
+          transition={{
+            duration: 0.33,
+            bounce: 0.1,
+            ease: "easeInOut",
+          }}
+          className="flex flex-col text-white text-xl gap-3 text-start no-scrollbar"
+        >
+          <p className="m-3">
+            Took multiple years of break from IT and started my own Freelance
+            Illustrator Career, Drawing has always been my hobby and COVID was
+            still a thing, so i figure why not make it into my job?
           </p>
           <div className="flex flex-row gap-3">
             <Image
@@ -243,58 +260,77 @@ export default function ProfileIrlPage({ pageReturn }) {
               className="object-cover"
             />
           </div>
-          <p className="m-3"> 
-            You can check a collection of my drawings in the &apos;Art&apos; section of the main screen!
+          <p className="m-3">
+            You can check a collection of my drawings in the &apos;Art&apos;
+            section of the main screen!
           </p>
-      </motion.div> 
-    break;   
+        </motion.div>
+      );
+      break;
 
-    case 5 :
-      content =
-      <motion.div
-        key={page}
-        custom={direction}
-        initial="enter"
-        animate="center"
-        exit="exit"
-        variants={variants}
-        transition={{ 
-          duration: 0.33,
-          bounce: 0.1,
-          ease:"easeInOut"
-        }}
-        className="flex flex-col text-white text-xl gap-3 text-start no-scrollbar">
-          <p className="m-3"> 
-            Even though i thoroughly enjoyed drawing, the freelance gig wasn&apos;t sustainable and COVID was over
-            , so i dived back into the IT field, Now currently has a working contract at Lintas Borneo Line as
-            a Full Stack Developer with Django. And now currently working on this site as a passion project! 
+    case 5:
+      content = (
+        <motion.div
+          key={page}
+          custom={direction}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          variants={variants}
+          transition={{
+            duration: 0.33,
+            bounce: 0.1,
+            ease: "easeInOut",
+          }}
+          className="flex flex-col text-white text-xl gap-3 text-start no-scrollbar"
+        >
+          <p className="m-3">
+            Even though i thoroughly enjoyed drawing, the freelance gig
+            wasn&apos;t sustainable and COVID was over , so i dived back into
+            the IT field, Now currently has a working contract at Lintas Borneo
+            Line as a Full Stack Developer with Django. And now currently
+            working on this site as a passion project!
           </p>
-          <p className="m-3"> 
-            I realized this has turned into a powerpoint project, i&apos;ll just add more pics to make it up. probably of the cats.
+          <p className="m-3">
+            I realized this has turned into a powerpoint project, i&apos;ll just
+            add more pics to make it up. probably of the cats.
           </p>
-      </motion.div> 
-    break;     
+        </motion.div>
+      );
+      break;
 
     default:
-      alert("End of Navigation!")
-      setPage(1)
+      alert("End of Navigation!");
+      setPage(1);
       break;
   }
 
   return (
     <>
       <div className="relative z-10 items-center flex gap-6 justify-center w-full h-full md:w-[75vw] md:h-[80vh]">
-        <label 
-        onClick={()=>{ goToPage(page-1)}}
-        htmlFor="" className="text-white hover:text-black hover:bg-white p-3 cursor-pointer transition-colors duration-300"><i className="fas fa-arrow-left"></i></label>
-        <div className="flex flex-col items-center md:flex-row gap-4 w-[full] h-full md:w-[75vw] md:[h-96vh]"> 
+        <label
+          onClick={() => {
+            goToPage(page - 1);
+          }}
+          htmlFor=""
+          className="text-white hover:text-black hover:bg-white p-3 cursor-pointer transition-colors duration-300"
+        >
+          <i className="fas fa-arrow-left"></i>
+        </label>
+        <div className="flex flex-col items-center md:flex-row gap-4 w-[full] h-full md:w-[75vw] md:[h-96vh]">
           <AnimatePresence mode="wait" custom={direction}>
-          {content}
+            {content}
           </AnimatePresence>
         </div>
-        <label 
-        onClick={()=>{ goToPage(page+1)}}
-        htmlFor="" className="text-white hover:text-black hover:bg-white p-3 cursor-pointer transition-colors duration-300"><i className="fas fa-arrow-right"></i></label>
+        <label
+          onClick={() => {
+            goToPage(page + 1);
+          }}
+          htmlFor=""
+          className="text-white hover:text-black hover:bg-white p-3 cursor-pointer transition-colors duration-300"
+        >
+          <i className="fas fa-arrow-right"></i>
+        </label>
       </div>
       <button
         onClick={return_}
