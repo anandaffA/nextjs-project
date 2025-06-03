@@ -17,7 +17,7 @@ function Post({ post, isUser }) {
 
   const supabase = createClient();
 
-  const submitEdit = async (id) => {
+  const submitEdit = async (id:number) => {
     let img_url = "";
     if (!postContent.trim()) {
       alert("Post content cannot be empty!");
@@ -50,7 +50,7 @@ function Post({ post, isUser }) {
         modified_at: new Date().toISOString(),
       })
       .eq("id", id);
-    console.log("Done Loading... Processing Result");
+    console.log("Processing Result");
     if (error) {
       console.error("Error updating post:", error);
       alert(`Error Updating Post! Please try again. ${error.message}`);
@@ -69,7 +69,7 @@ function Post({ post, isUser }) {
     // Optionally, you can trigger a refresh or update the post state here
   };
 
-  const deletePost = async (id) => {
+  const deletePost = async (id:number) => {
     if (confirm("Are you sure you want to delete this post?")) {
       console.log(`Post with ID ${id} is being deleted`);
       setLoading(true);
@@ -175,6 +175,7 @@ function Post({ post, isUser }) {
           <p className="text-lg text-forest-moss p-3">{post.content}</p>
         )}
         <div className="p-2 mb-2 flex justify-between items-center">
+          {post.img && (
           <button
             onClick={() => setIsOpen(true)}
             className="text-base p-2 font-bold cursor-pointer 
@@ -183,6 +184,7 @@ function Post({ post, isUser }) {
           >
             Read More <i className="fas fa-chevron-right"></i>{" "}
           </button>
+          )}
           {isUser && (
             <div className="flex">
               <span

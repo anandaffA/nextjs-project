@@ -3,18 +3,19 @@ import { useState } from "react";
 import Image from "next/image";
 import { useLoading } from "@/app/components/loading-context";
 import { createClient } from "../../../../../lib/supabaseClient";
+import { UseUser } from "./user-context";
 
-function HeaderPost({ refreshState, user }) {
+function HeaderPost({ refreshState}) {
   const supabase = createClient();
   const [preview, setPreview] = useState<string | null>(null);
   const [imgFile, setImgFile] = useState<File | null>(null);
-
+  
   const { setLoading } = useLoading();
-
-  const [postContent, setPostContent] = useState("");
-
+  
+  const [postContent, setPostContent] = useState<string>("");
+  
   const title = "";
-
+  
   const imageHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     setImgFile(file || null);
@@ -44,23 +45,23 @@ function HeaderPost({ refreshState, user }) {
       const file_format = imgFile.name.split(".").pop();
       const file_name = `${Date.now()}.${file_format}`;
       const { error: error_storage } = await supabase.storage
-        .from("posts")
-        .upload(file_name, imgFile);
+      .from("posts")
+      .upload(file_name, imgFile);
       if (error_storage) {
         alert(`Image Upload failed with : ${error_storage.message}`);
         setLoading(false);
         return false;
       }
-
+      
       const { data: get_url } = await supabase.storage
-        .from("posts")
-        .getPublicUrl(file_name);
+      .from("posts")
+      .getPublicUrl(file_name);
       img_url = get_url.publicUrl;
     }
-
+    
     const { data, error } = await supabase.from("posts").insert([
       {
-        user_id: user["id"],
+        user_id: user?.id,
         content: postContent,
         img: img_url,
         placeholder_img: hash,
@@ -80,6 +81,7 @@ function HeaderPost({ refreshState, user }) {
     setLoading(false);
     refreshState();
   };
+  const {user} = UseUser()
 
   return (
     <form
@@ -116,7 +118,7 @@ function HeaderPost({ refreshState, user }) {
         <div className="flex flex-row items-center gap-2  p-3 border-b-1 border-dashed">
           <Image
             src={
-              user["profile_picture"] ||
+              user?.profile_picture ||
               "https://picsum.photos/seed/picsum/45/45"
             }
             alt={title}
@@ -126,7 +128,7 @@ function HeaderPost({ refreshState, user }) {
             height={45}
           />
           <span className="text-xl text-center font-semibold text-forest-bark/75">
-            {user["name"]}
+            {user?.name}
           </span>
         </div>
         {/* border */}

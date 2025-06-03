@@ -181,7 +181,7 @@ function Home() {
         <Modal isOpen={page_confirm} onClose={() => confirmState("")}>
           <div className="flex md:flex-1 flex-col p-4">
             <span className="text-white p-2 font-mono text-center mb-3 ">
-              FOR.est is a mock-up social media site with fully working login, register and a functional posting system, Proceed?
+              FOR.est is a mock-up social media site with fully working login, register and functional posting system, Proceed?
             </span>
             <div className="flex flex-1 flex-row gap-8 text-white text-center font-mono items-center justify-center">
               <span

@@ -1,11 +1,16 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { createClient } from "../../../../../lib/supabaseClient";
 import { useLoading } from "@/app/components/loading-context";
+import { UseUser } from "./user-context";
 
 export default function PostModal({ isOpen, onClose, content }) {
+
+  const { user } = UseUser();
+  const router = useRouter();
   type ContentType = {
     id: string;
     user_id: string;
@@ -17,8 +22,8 @@ export default function PostModal({ isOpen, onClose, content }) {
   };
   const [comment, setComment] = useState<string>("");
   const [comments, setComments] = useState<ContentType[]>([]); // Adjust type as needed
-
   const supabase = createClient();
+
   const { setLoading } = useLoading();
 
   const submitComment = async () => {
@@ -26,15 +31,13 @@ export default function PostModal({ isOpen, onClose, content }) {
       alert("Comment cannot be empty!");
       return;
     }
-    setLoading(true);
-    console.log("Submitting comment:", comment);
-    console.log(content);
+    setLoading(true)
 
     try {
       const { error } = await supabase.from("comments").insert([
         {
           post_id: content.id,
-          user_id: content.user_id,
+          user_id: user?.id,
           comment: comment,
           created_at: new Date().toISOString(),
         },
@@ -51,6 +54,19 @@ export default function PostModal({ isOpen, onClose, content }) {
     setLoading(false);
     return true;
   };
+
+  const deleteComment = async (id:string) => {
+    setLoading(true);
+    const { error } = await supabase.from("comments").delete().eq("id", id);
+    if (error) {
+      alert("Error deleting comment:" + error.message);
+      return false
+    }
+    alert ("Comment deleted successfully!");
+    setLoading(false);
+    router.refresh();
+    return true;
+  }
 
   useEffect(() => {
     if (isOpen) {
@@ -159,6 +175,21 @@ export default function PostModal({ isOpen, onClose, content }) {
                         />
                         <span className="font-semibold">{comment.name}:</span>{" "}
                         <span>{comment.comment}</span>
+
+                        {comment.user_id === user?.id && (
+                          <button
+                            className="ml-auto text-black hover:text-red-500 transition-colors cursor-pointer"
+                            onClick={() => {
+                              if (!confirm("Are you sure you want to delete this comment?")) {
+                                return;
+                              }
+                              deleteComment(comment.id);
+                            }}
+                          >
+                            <i className="fas fa-close"></i>
+                          </button>
+                        )}
+
                       </div>
                     ))}
                   </div>
@@ -169,7 +200,7 @@ export default function PostModal({ isOpen, onClose, content }) {
                   <input
                     type="text"
                     placeholder="Add a comment..."
-                    className="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-forest-bark/50"
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
                   />
@@ -178,7 +209,7 @@ export default function PostModal({ isOpen, onClose, content }) {
                     onClick={() => {
                       submitComment();
                     }}
-                    className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+                    className="mt-2 px-4 py-2 bg-forest-bark cursor-pointer text-white rounded-full hover:bg-forest-mist transition-colors"
                   >
                     {" "}
                     Post Comment{" "}

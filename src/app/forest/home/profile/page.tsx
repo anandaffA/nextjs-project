@@ -201,7 +201,7 @@ export default function ProfilePage() {
             key="post_header"
             className="backdrop-blur-md bg-white/10 border border-white/20 rounded-xl p-4 shadow-md"
           > */}
-          <HeaderPost user={user} refreshState={refreshHandler} />
+          <HeaderPost refreshState={refreshHandler} />
           {/* </div> */}
           {posts.length > 0 ? (
             posts.map((post, index) => {

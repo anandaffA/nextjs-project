@@ -8,12 +8,14 @@ import SidebarLeft from "./components/sidebar-left";
 import SidebarRight from "./components/sidebar-right";
 import LoadingOverlay from "@/app/components/loading-layout";
 import { LoadingProvider } from "../../components/loading-context";
+import { UserProvider } from "./components/user-context";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <div className="font-garamond min-h-screen w-screen flex flex-col">
-      <Navbar />
+      <UserProvider>
       <LoadingProvider>
+      <Navbar />
         <LoadingOverlay />
         <main className="relative flex md:px-12 flex-row flex-grow w-full max-w-full max-h-full h-full">
           <Image
@@ -35,6 +37,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </main>
         <Footer />
       </LoadingProvider>
+      </UserProvider>
     </div>
   );
 }

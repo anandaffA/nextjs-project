@@ -42,8 +42,8 @@ export const fetchSession = async () => {
 
        if (error) {
          console.error("Error fetching user:", error);
-       } else {
-         return userData
+         throw new Error ("No User Found?")
        }
+      return userData
      }
    };

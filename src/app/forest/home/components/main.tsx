@@ -5,6 +5,7 @@ import Post from "./post-card";
 import { fetchSession } from "../../components/login/client";
 import { createClient } from "../../../../../lib/supabaseClient";
 // import { createClient } from "../../../../../lib/supabaseServer";
+// import { UseUser } from "./user-context";
 import Form from "../../components/form";
 // import { AnimatePresence, motion } from "framer-motion";
 // import { useLoading } from "@/app/components/loading-context";
@@ -38,7 +39,10 @@ export default function Main() {
   const [images, setImages] = useState<image[]>([]);
   const [user, setUser] = useState<User[]>([]);
   // const [isUser, setIsUser] = useState<boolean>(false)
-
+  // const TestData = UseUser()
+  // useEffect(()=>{
+  //   console.log("TESTING: ", TestData)
+  // },[TestData])
   const supabase = createClient();
 
   // const {isLoading} = useLoading()
@@ -49,26 +53,6 @@ export default function Main() {
 
   //fetch user
   useEffect(() => {
-    //  const fetchSession = async () => {
-    //    const {
-    //      data: { session },
-    //    } = await supabase.auth.getSession();
-    //    if (!session) { throw new Error ('User Not Found?')}
-    //    if (session?.user?.id) {
-    //      const { data: userData, error } = await supabase
-    //        .from("users")
-    //        .select("*")
-    //        .eq("uuid", session.user.id)
-    //        .single();
-
-    //      if (error) {
-    //        console.error("Error fetching user:", error);
-    //      } else {
-    //        setUser(userData)
-    //      }
-    //    }
-    //  };
-    //  fetchSession();
     const getUser = async () => {
       const session = await fetchSession();
       console.log("debug: ", session);
@@ -96,7 +80,7 @@ export default function Main() {
   return (
     <>
       {/* Center Content */}
-      <HeaderPost refreshState={refreshHandler} user={user} />
+      <HeaderPost refreshState={refreshHandler} />
 
       {/* from supabase */}
       {images.length > 0 ? (
