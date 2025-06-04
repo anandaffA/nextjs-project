@@ -28,13 +28,14 @@ function Art({ returnPage, isLoading, isAdmin }) {
   };
   const [is_open_form, openForm] = useState<boolean>(false);
   const [is_open_image, openImageModal] = useState<boolean>(false);
-  const [title, setTitle] = useState<string | null>(null);
-  const [description, setDesc] = useState<string | null>(null);
+  const [title, setTitle] = useState<string>('');
+  const [description, setDesc] = useState<string>('');
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [images, imageData] = useState<ImageData[]>([]);
   const [open_image, openImage] = useState<OpenImageData | null>(null);
   const [refresh, setRefresh] = useState<boolean>(false);
+  const [editing, editImage] = useState<boolean>(false)
   //const [is_loading, loadState] = useState<boolean>(false)
 
   // const ImageMotion = motion(Image);
@@ -111,16 +112,31 @@ function Art({ returnPage, isLoading, isAdmin }) {
       openForm(false);
       setFile(null);
       setPreview(null);
-      setTitle(null);
-      setDesc(null);
+      setTitle('');
+      setDesc('');
       return true;
     }
   };
 
   const clickImage = (data) => {
     openImage(data);
+    setTitle(data['title'])
+    setDesc(data['description'])
     openImageModal(true);
   };
+
+
+  const submitEditImage = async (id: string) => {
+    isLoading(false)
+    const {error} = await supabase.from("gallery").update({title:title, description:description}).eq("id" , id)
+    if (error) {
+      alert("Failed to save data!" + error.message)
+      return false
+    }
+    alert("Data Saved!")
+    isLoading(true)
+    return true
+  }
 
   const deleteImage = async (id: string, file_name: string) => {
     if (confirm("Are you sure you want to delete this image?")) {
@@ -181,7 +197,7 @@ function Art({ returnPage, isLoading, isAdmin }) {
       y: 0,
       opacity: 1,
       transition: {
-        delay: i * 0.15,
+        delay: i * 0.05,
         type: "spring",
         stiffness: 100,
         damping: 20,
@@ -191,7 +207,7 @@ function Art({ returnPage, isLoading, isAdmin }) {
 
   return (
     <>
-      <nav className="flex items-center justify-center md:justify-between px-5">
+      <nav className="flex items-center justify-center md:justify-between px-5 no-scrollbar">
         {/* <div className="flex flex-col items-center md:flex-row md:items-end gap-2 pt-5"> */}
         {isAdmin && (
           <Button onClick={openForm_}>
@@ -312,25 +328,62 @@ function Art({ returnPage, isLoading, isAdmin }) {
           />
           <div className="flex flex-1 flex-col">
             <div className="flex justify-between p-4 border-white border-b border-dashed">
-              <p className="text-white text-start flex align-middle text-xl ">
-                {" "}
-                {open_image.title}
-              </p>
+              { editing == true ? (
+                <input 
+                type="text" 
+                value={title}
+                onChange={(e)=>setTitle(e.target.value)} 
+                className="text-white text-start flex align-middle text-xl "/> 
+              )
+              :  
+              (
+                <p className="text-white text-start flex align-middle text-xl ">
+                  {" "}
+                  {open_image.title}
+                </p> 
+              )
+              }
               {isAdmin && (
-                <button
-                  type="button"
-                  onClick={() =>
-                    deleteImage(open_image.id, open_image.file_name)
-                  }
-                >
-                  <i className="fas fa-close text-white hover:text-red-600 transition-colors duration-300 cursor-pointer"></i>{" "}
-                </button>
+                <>
+                  <div className="flex gap-4">
+                    <button
+                    type="button"
+                    onClick={() => editImage(!editing)}
+                    >
+                    <i className="fas fa-pen text-white hover:text-emerald-400 transition-colors duration-300 cursor-pointer"></i>{" "}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        deleteImage(open_image.id, open_image.file_name)
+                      }
+                      >
+                      <i className="fas fa-close text-white hover:text-red-600 transition-colors duration-300 cursor-pointer"></i>{" "}
+                    </button>
+                  </div>
+                </>
               )}
             </div>
-            <p className="text-white text-start p-4 flex align-middle text-lg">
-              {" "}
-              {open_image.description}
-            </p>
+            {editing ? (
+              <>
+                <input 
+                type="text"
+                value={description}
+                onChange={(e)=>setDesc(e.target.value)}
+                className="text-white text-start p-4 flex align-middle text-lg"/>
+                <span 
+                onClick={()=>submitEditImage(open_image.id)}
+                className="text-white text-lg hover:text-black p-4 hover:bg-white border-t border-white cursor-pointer transition-colors duration-300 "
+                > Edit </span>
+              </>
+            ):
+            (
+              <p className="text-white text-start p-4 flex align-middle text-lg">
+                {" "}
+                {open_image.description}
+              </p>
+            )
+            }
           </div>
         </Modal>
       )}
