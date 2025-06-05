@@ -103,14 +103,14 @@ export default function LoginTemplate({ onLogin, testConfirm }) {
                 {" "}
                 For.est{" "}
               </span>
-              <a
+              {/* <a
                 href="https://drive.google.com/file/d/110VlrxSP8hopxlJkAWVzQ74AbLII0wCS/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:bg-white hover:text-black/90 transition-colors duration-300 cursor-pointer py-5 px-8 border-y-1 border-r-1 border-l-1 md:border-l-0  bg-black/25"
               >
                 Resume
-              </a>
+              </a> */}
             </motion.div>
           )}
         </AnimatePresence>

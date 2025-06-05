@@ -62,7 +62,7 @@ export default function ProfileIrlPage({ pageReturn }) {
             bounce: 0.1,
             ease: "easeInOut",
           }}
-          className="flex w-auto h-auto"
+          className="flex w-auto h-auto no-scrollbar"
         >
           <motion.div
             layout

@@ -125,7 +125,6 @@ function Art({ returnPage, isLoading, isAdmin }) {
     openImageModal(true);
   };
 
-
   const submitEditImage = async (id: string) => {
     isLoading(false)
     const {error} = await supabase.from("gallery").update({title:title, description:description}).eq("id" , id)
@@ -208,18 +207,15 @@ function Art({ returnPage, isLoading, isAdmin }) {
   return (
     <>
       <nav className="flex items-center justify-center md:justify-between px-5 no-scrollbar">
-        {/* <div className="flex flex-col items-center md:flex-row md:items-end gap-2 pt-5"> */}
         {isAdmin && (
           <Button onClick={openForm_}>
             <i className="fas fa-plus text-center"></i> Add Image
           </Button>
         )}
-        {/* </div> */}
         <Button onClick={() => returnPage("login")}>
           <i className="fas fa-arrow-left text-center"></i> Return
         </Button>
       </nav>
-
       <motion.div
         className="relative columns-2 md:columns-4"
         variants={containerVariants}
