@@ -44,11 +44,11 @@ function Home() {
     loadState(false);
   }, [bg_switch]);
 
-  useEffect(()=>{
-    if (loadForest){
-      router.push('/forest')
+  useEffect(() => {
+    if (loadForest) {
+      router.push("/forest");
     }
-  },[loadForest])
+  }, [loadForest]);
 
   switch (page_state) {
     case "login":
@@ -149,12 +149,13 @@ function Home() {
               alt="LoginScreen"
               fill
               objectFit="cover"
-              onLoad={() => loadState(true)}
+              onLoadingComplete={() => loadState(true)}
               className={
                 page_state != "login" ? "brightness-75" : "brightness-100"
               }
             />
           </motion.div>
+          {/* end background image */}
         </AnimatePresence>
         <AnimatePresence mode="wait">
           {!is_loaded && (
@@ -181,7 +182,8 @@ function Home() {
         <Modal isOpen={page_confirm} onClose={() => confirmState("")}>
           <div className="flex md:flex-1 flex-col p-4">
             <span className="text-white p-2 font-mono text-center mb-3 ">
-              FOR.est is a mock-up social media site with fully working login, register and functional posting system, Proceed?
+              FOR.est is a mock-up social media site with fully working login,
+              register and functional posting system, Proceed?
             </span>
             <div className="flex flex-1 flex-row gap-8 text-white text-center font-mono items-center justify-center">
               <span
