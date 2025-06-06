@@ -50,6 +50,15 @@ function Home() {
     }
   }, [loadForest]);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      console.warn("Forcing loadState(true) after 5s fallback");
+      loadState(true);
+    }, 5000);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
   switch (page_state) {
     case "login":
       content = (
