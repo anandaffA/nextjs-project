@@ -93,9 +93,9 @@ function Home() {
       content = (
         <motion.div
           key="gallery-test"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -50 }}
+          initial={{    opacity: 0, y: 50 }}
+          animate={{    opacity: 1, y: 0 }}
+          exit={{       opacity: 0, y: -50 }}
           transition={{ duration: 0.5 }}
           className="relative h-full w-full md:w-2/3 overflow-y-auto overflow-x-auto justify-center items-center no-scrollbar"
         >
@@ -107,9 +107,9 @@ function Home() {
       content = (
         <motion.div
           key="art-gallery"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -50 }}
+          initial={{ opacity: 0, y: 50  }}
+          animate={{ opacity: 1, y: 0   }}
+          exit=   {{ opacity: 0, y: -50 }}
           transition={{ duration: 0.5 }}
           className="relative h-full w-full md:w-6/7 overflow-y-auto justify-center items-center no-scrollbar"
         >
@@ -131,6 +131,7 @@ function Home() {
         </motion.div>
       );
       break;
+
     default:
       alert("Invalid Entry!");
       pageState("login");

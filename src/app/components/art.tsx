@@ -33,6 +33,7 @@ function Art({ returnPage, isLoading, isAdmin }) {
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [images, imageData] = useState<ImageData[]>([]);
+  const [isNsfw, setNsfw] = useState<boolean>(false)
   const [open_image, openImage] = useState<OpenImageData | null>(null);
   const [refresh, setRefresh] = useState<boolean>(false);
   const [editing, editImage] = useState<boolean>(false)
@@ -98,6 +99,7 @@ function Art({ returnPage, isLoading, isAdmin }) {
         file_name: file_name,
         path: img_url,
         blur: hash.blurHash,
+        nsfw: isNsfw,
         created_at: new Date(),
       },
     ]);
@@ -114,6 +116,7 @@ function Art({ returnPage, isLoading, isAdmin }) {
       setPreview(null);
       setTitle('');
       setDesc('');
+      setNsfw(false)
       return true;
     }
   };
@@ -178,6 +181,10 @@ function Art({ returnPage, isLoading, isAdmin }) {
     get_images();
   }, [refresh]);
 
+  useEffect(()=>{
+    editImage(false)
+  },[is_open_form,is_open_image])
+
   const containerVariants = {
     hidden: {},
     visible: {
@@ -224,7 +231,6 @@ function Art({ returnPage, isLoading, isAdmin }) {
       >
         {images.map((img, i) => (
           <motion.div
-            // layo
             key={`img_${img.id}`}
             // layoutId={`layout_${img.id}`}
             variants={imageVariants}
@@ -301,6 +307,22 @@ function Art({ returnPage, isLoading, isAdmin }) {
                   type="text"
                 />
               </div>
+              <div className="relative flex flex-row items-center w-1/2">
+                <p className="text-white text-start p-4">SAFE</p>
+                <div 
+                onClick={()=>setNsfw(!isNsfw)}
+                className={`w-12 h-6 ${!isNsfw?"bg-gray-700":"bg-gray-300"} rounded-full flex items-center p-1
+                transition-colors duration-300 cursor-pointer ease-in-out
+                ${!isNsfw?"justify-start":"justify-end"}`}>
+                  <motion.div 
+                  layout
+                  transition={{
+                    duration: 0.25,
+                    ease: "easeInOut"
+                  }}
+                  className={`w-4 h-4 ${!isNsfw?"bg-gray-400":"bg-white"} rounded-full shadow-md`}/>
+                </div>
+              </div>
               <Button onClick={submitForm_}>Submit</Button>
             </div>
           </form>
@@ -354,7 +376,7 @@ function Art({ returnPage, isLoading, isAdmin }) {
                         deleteImage(open_image.id, open_image.file_name)
                       }
                       >
-                      <i className="fas fa-close text-white hover:text-red-600 transition-colors duration-300 cursor-pointer"></i>{" "}
+                      <i className="fas fa-trash text-white hover:text-red-600 transition-colors duration-300 cursor-pointer"></i>{" "}
                     </button>
                   </div>
                 </>
@@ -366,7 +388,25 @@ function Art({ returnPage, isLoading, isAdmin }) {
                 type="text"
                 value={description}
                 onChange={(e)=>setDesc(e.target.value)}
+                id="input_description"
                 className="text-white text-start p-4 flex align-middle text-lg"/>
+
+                <div className="relative flex flex-row items-center w-1/2">
+                  <p className="text-white text-start p-4">NSFW</p>
+                  <div 
+                  onClick={()=>setNsfw(!isNsfw)}
+                  className={`w-12 h-6 ${!isNsfw?"bg-gray-700":"bg-gray-300"} rounded-full flex items-center p-1
+                  transition-colors duration-300 cursor-pointer ease-in-out
+                  ${!isNsfw?"justify-start":"justify-end"}`}>
+                    <motion.div 
+                    layout
+                    transition={{
+                      duration: 0.25,
+                      ease: "easeInOut"
+                    }}
+                    className={`w-4 h-4 ${!isNsfw?"bg-gray-400":"bg-white"} rounded-full shadow-md`}/>
+                  </div>
+                </div>
                 <span 
                 onClick={()=>submitEditImage(open_image.id)}
                 className="text-white text-lg hover:text-black p-4 hover:bg-white border-t border-white cursor-pointer transition-colors duration-300 "
